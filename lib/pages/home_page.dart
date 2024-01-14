@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: AppColors.primary, // Button color changed to orange
+        color: Color(0xFFFF9100), // Button color changed to orange
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
