@@ -86,19 +86,18 @@ Widget build(BuildContext context) {
                                   builder: (_) => MenuDetailsPage(diningOption: diningOption),
                                 ));
                               },
-                            ),
+                            ),/*
                             TextButton(
                               child: Text("Ver Direccion"),
                               onPressed: () {
                                 Navigator.pop(context); // Cierra el diálogo
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (_) => CompassPage(
-                                    targetLatitude: diningOption.latitude,
-                                    targetLongitude: diningOption.longitude,
+                                    destinationAngle: 240
                                   ),
                                 ));
                               },
-                            ),
+                            ),*/
                           ],
                         );
                       },

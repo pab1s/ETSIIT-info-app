@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   sensors_plus: ^4.0.2
   carousel_slider: ^4.2.1
+  # flutter_compass: ^0.8.0
 
 dev_dependencies:
   flutter_test:
