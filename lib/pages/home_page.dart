@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TimeTablePage()),
+                        builder: (context) =>  TimeTableCalendar()),
                   ),
                 ),
                 _buildGridButton(
