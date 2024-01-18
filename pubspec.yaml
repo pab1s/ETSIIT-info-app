@@ -39,8 +39,7 @@ dependencies:
   carousel_slider: ^4.2.1
   calendar_view: ^1.0.4
   syncfusion_flutter_calendar: ^24.1.46
-  # flutter_compass: ^0.8.0
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +68,8 @@ flutter:
     - assets/banner.png
     - assets/avatar.jpeg
     - assets/compass.png
+    - assets/tui.jpg
+    - assets/luiscrespo-QR.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

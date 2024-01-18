@@ -1,17 +1,52 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import '../widgets/top_bar.dart';
-import '../widgets/bottom_bar.dart';
 import '../widgets/side_bar.dart';
 import '../utils/colors.dart';
 import 'locations_page.dart';
 import 'clubs_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
+import 'tuiqr_page.dart'; // Asegúrate de tener esta página
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TuiQrPage()), // Asegúrate de tener TuiQrPage
+      );
+    }
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget _buildGridButton({required IconData icon, required String label, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        color: Color(0xFFFF9100),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(icon, size: 50, color: Colors.white),
+              Text(label, style: const TextStyle(color: Colors.white)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +54,9 @@ class HomePage extends StatelessWidget {
       appBar: TopBar(title: 'Home'),
       drawer: SideBar(),
       body: SingleChildScrollView(
-        // Make the page scrollable
         child: Column(
           children: <Widget>[
-            const Padding(
+                 const Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,31 +139,46 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomBar(),
-    );
-  }
-
-  Widget _buildGridButton(
-      {required IconData icon,
-      required String label,
-      required VoidCallback onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        color: Color(0xFFFF9100), // Button color changed to orange
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(icon,
-                  size: 50, color: Colors.white), // Icon color changed to white
-              Text(label,
-                  style: const TextStyle(
-                      color: Colors.white)), // Text color changed to white
-            ],
-          ),
-        ),
+      bottomNavigationBar: BottomBar(
+        currentIndex: _selectedIndex,
+        onItemSelected: _onItemTapped,
       ),
     );
   }
 }
+
+class BottomBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onItemSelected;
+
+  const BottomBar({
+    super.key,
+    required this.currentIndex,
+    required this.onItemSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: onItemSelected,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.qr_code),
+          label: 'QR',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map),
+          label: 'Map',
+        ),
+      ],
+      selectedItemColor: AppColors.primary,
+    );
+  }
+}
+
+// Asegúrate de tener una página TuiQrPage para manejar la vista de la TUI y el QR.
