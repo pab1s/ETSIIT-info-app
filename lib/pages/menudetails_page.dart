@@ -6,7 +6,7 @@ import 'package:etsiit_info_app/entities/dining_option.dart';
 class MenuDetailsPage extends StatelessWidget {
   final DiningOption diningOption;
 
-  const MenuDetailsPage({Key? key, required this.diningOption}) : super(key: key);
+  const MenuDetailsPage({super.key, required this.diningOption});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class MenuDetailsPage extends StatelessWidget {
             children: [
               Text(
                 sectionTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.orange, // Añade color anaranjado al título de la sección
@@ -39,7 +39,7 @@ class MenuDetailsPage extends StatelessWidget {
               ...items.map((item) => Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(item),
-              )).toList(),
+              )),
               const SizedBox(height: 16.0), // Espacio entre secciones
             ],
           );

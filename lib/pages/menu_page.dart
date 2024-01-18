@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:etsiit_info_app/entities/dining_option.dart';
-import 'package:etsiit_info_app/pages/compass_page.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -56,7 +55,7 @@ Widget build(BuildContext context) {
     ),
     body: Column(
       children: [
-        SizedBox(height: 150), // Ajusta este valor para controlar el espacio superior
+        const SizedBox(height: 150), // Ajusta este valor para controlar el espacio superior
         CarouselSlider(
           carouselController: _carouselController,
           options: CarouselOptions(
@@ -76,10 +75,10 @@ Widget build(BuildContext context) {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text(diningOption.name),
-                          content: Text("Selecciona una opción"),
+                          content: const Text("Selecciona una opción"),
                           actions: <Widget>[
                             TextButton(
-                              child: Text("Ver Menú"),
+                              child: const Text("Ver Menú"),
                               onPressed: () {
                                 Navigator.pop(context); // Cierra el diálogo
                                 Navigator.of(context).push(MaterialPageRoute(
@@ -114,7 +113,7 @@ Widget build(BuildContext context) {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            Icon(Icons.restaurant_menu, size: 100, color: Colors.white),
+                            const Icon(Icons.restaurant_menu, size: 100, color: Colors.white),
                             Text(
                               diningOption.name,
                               style: const TextStyle(fontSize: 24.0, color: Colors.white),
@@ -139,7 +138,7 @@ Widget build(BuildContext context) {
 // La clase MenuDetailsPage se define en otro archivo.
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     title: 'Dining Options App',
     home: MenuPage(),
   ));

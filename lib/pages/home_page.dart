@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TuiQrPage()), // Asegúrate de tener TuiQrPage
+        MaterialPageRoute(builder: (context) => const TuiQrPage()), // Asegúrate de tener TuiQrPage
       );
     }
     setState(() {
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Color(0xFFFF9100),
+        color: const Color(0xFFFF9100),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(title: 'Home'),
-      drawer: SideBar(),
+      appBar: const TopBar(title: 'Home'),
+      drawer: const SideBar(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                   label: 'Locations',
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LocationsPage()),
+                    MaterialPageRoute(builder: (context) => const LocationsPage()),
                   ),
                 ),
                 _buildGridButton(
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  TimeTableCalendar()),
+                        builder: (context) =>  const TimeTableCalendar()),
                   ),
                 ),
                 _buildGridButton(

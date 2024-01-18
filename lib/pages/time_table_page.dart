@@ -45,7 +45,7 @@ class CalendarAppointment extends State<TimeTableCalendar> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Cerrar'),
+                          child: const Text('Cerrar'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
