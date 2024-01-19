@@ -41,22 +41,22 @@ class CoursesProvider {
     Course(
       title: 'ISE - Teoría',
       icon: Icons.business,
-      color: Color.fromARGB(255, 138, 43, 226),
+      color: const Color.fromARGB(255, 138, 43, 226),
     ),
     Course(
       title: 'VC - Prácticas',
       icon: Icons.visibility,
-      color: Color.fromARGB(255, 204, 180, 0),
+      color: const Color.fromARGB(255, 204, 180, 0),
     ),
     Course(
       title: 'ISE - Prácticas',
       icon: Icons.business,
-      color: Color.fromARGB(255, 138, 43, 226),
+      color: const Color.fromARGB(255, 138, 43, 226),
     ),
     Course(
       title: 'VC - Teoría',
       icon: Icons.visibility,
-      color: Color.fromARGB(255, 204, 180, 0),
+      color: const Color.fromARGB(255, 204, 180, 0),
     ),
   ];
 
