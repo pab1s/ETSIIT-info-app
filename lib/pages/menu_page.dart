@@ -177,6 +177,7 @@ Postres:
 - Helado de vainilla
 - Mousse de chocolate
 
+Precio........................................3.5€
 ''';
 
 const double lat = 37.1481383;
