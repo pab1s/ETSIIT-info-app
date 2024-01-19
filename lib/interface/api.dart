@@ -1,5 +1,6 @@
 /// OPENROUTESERVICE DIRECTION SERVICE REQUEST
 /// Parameters are : startPoint, endPoint and api key
+library;
 
 const String baseUrl =
     'https://api.openrouteservice.org/v2/directions/driving-car';

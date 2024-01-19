@@ -60,21 +60,21 @@ class MenuDetailsPage extends StatelessWidget {
                 fontWeight: FontWeight.normal, // Letra en negrita
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Añadir lógica para manejar el pago
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange, // Color naranja para el botón
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              ),
               child: const Text(
                 'Pagar',
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold), // Texto en negrita
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange, // Color naranja para el botón
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
