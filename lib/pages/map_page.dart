@@ -26,7 +26,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
-  double _zoomLevel = 14; // default zoom level
+  double _zoomLevel = 16; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;
   late Marker destinationMarker;
@@ -75,7 +75,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     FlutterCompass.events?.listen((compassEvent) {
       setState(() {
         _compassHeading = compassEvent.heading ?? 0;
-        _animatedMapController.mapController.rotate(_compassHeading);
+        _animatedMapController.mapController.rotate(-_compassHeading);
       });
     });
   }
@@ -111,13 +111,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   Future<void> _updateCurrentLocation() async {
     try {
       LatLng location = await _getLocation();
-      LatLng destination = LatLng(widget.destLatitude, widget.destLongitude);
+      /*LatLng destination = LatLng(widget.destLatitude, widget.destLongitude);
       double distance = _calculateDistance(location, destination);
-      double zoomLevel = _calculateZoomLevel(distance);
+      double zoomLevel = _calculateZoomLevel(distance);*/
 
       setState(() {
         currentLocation = location;
-        _animatedMapController.mapController.move(location, zoomLevel);
+        //_animatedMapController.mapController.move(location, zoomLevel);
 
         originMarker = Marker(
           point: currentLocation!,
@@ -209,7 +209,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     }
   }
 
-  double _calculateDistance(LatLng loc1, LatLng loc2) {
+  /*double _calculateDistance(LatLng loc1, LatLng loc2) {
     var distance = Geolocator.distanceBetween(
       loc1.latitude,
       loc1.longitude,
@@ -241,7 +241,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     } else {
       return 8;
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +262,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
         mapController: _animatedMapController.mapController,
         options: MapOptions(
           initialCenter: currentLocation!,
-          initialZoom: 14,
+          initialZoom: _zoomLevel,
           initialRotation: _compassHeading,
         ),
         children: [
