@@ -44,6 +44,8 @@ dependencies:
   http: ^1.2.0
   geolocator: ^10.1.0
   light: ^3.0.1
+  pedometer: ^4.0.1
+  permission_handler: ^11.2.0
 
 dev_dependencies:
   flutter_test:

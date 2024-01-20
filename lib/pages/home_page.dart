@@ -17,10 +17,10 @@ class BottomBar extends StatelessWidget {
   final Function(int) onItemSelected;
 
   const BottomBar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onItemSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class BottomBar extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();

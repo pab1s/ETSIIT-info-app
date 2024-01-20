@@ -27,4 +27,10 @@ class LocationService {
 
     return await Geolocator.getCurrentPosition();
   }
+
+  static Future<bool> requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    return permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always;
+  }
 }

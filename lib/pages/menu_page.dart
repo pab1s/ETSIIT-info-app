@@ -119,7 +119,7 @@ class _MenuPageState extends State<MenuPage> {
                                 onPressed: () {
                                   Navigator.pop(context); // Cierra el diálogo
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => MapPage(
+                                    builder: (_) => const MapPage(
                                         destLatitude: 37.19436,
                                         destLongitude: -3.60441),
                                   ));
@@ -192,5 +192,5 @@ Postres:
 Precio........................................3.5€
 ''';
 
-final double lat = 37.1481383;
-final double longi = -3.6038452;
+const double lat = 37.1481383;
+const double longi = -3.6038452;

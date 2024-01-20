@@ -6,7 +6,7 @@ import 'dart:async';
 import 'package:light/light.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: _darkMode ? Colors.white : Colors.grey),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primary),
         ),
         // Color del texto dentro del TextField
