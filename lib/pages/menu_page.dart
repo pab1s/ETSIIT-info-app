@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'menudetails_page.dart';
 import 'map_page.dart';
+import 'package:light/light.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -17,6 +18,9 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   late CarouselController _carouselController;
   StreamSubscription<AccelerometerEvent>? _streamSubscription;
+  Light? _light;
+  StreamSubscription? _lightSubscription;
+  bool _darkMode = false;
 
   final List<DiningOption> diningOptions = [
     DiningOption(
@@ -41,6 +45,12 @@ class _MenuPageState extends State<MenuPage> {
   void initState() {
     super.initState();
     _carouselController = CarouselController();
+    _light = Light();
+    _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
+      setState(() {
+        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+      });
+    });
     _streamSubscription = accelerometerEventStream().listen(
       (AccelerometerEvent event) {
         if (event.x > 4) {
@@ -149,6 +159,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ],
       ),
+      backgroundColor: _darkMode ? Colors.black : Colors.white,
     );
   }
 }
@@ -181,5 +192,5 @@ Postres:
 Precio........................................3.5€
 ''';
 
-const double lat = 37.1481383;
-const double longi = -3.6038452;
+final double lat = 37.1481383;
+final double longi = -3.6038452;

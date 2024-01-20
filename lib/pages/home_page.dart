@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:light/light.dart';
+// Importa tus widgets y páginas personalizadas aquí
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
 import '../utils/colors.dart';
@@ -6,18 +9,72 @@ import 'locations_page.dart';
 import 'clubs_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
-import 'tuiqr_page.dart'; // Asegúrate de tener esta página
+import 'tuiqr_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+// La clase BottomBar debe estar fuera de la clase HomePage
+class BottomBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onItemSelected;
+
+  const BottomBar({
+    Key? key,
+    required this.currentIndex,
+    required this.onItemSelected,
+  }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: onItemSelected,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.qr_code),
+          label: 'QR',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map),
+          label: 'Map',
+        ),
+      ],
+      selectedItemColor: AppColors.primary,
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  Light? _light;
+  StreamSubscription? _lightSubscription;
+  bool _darkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _light = Light();
+    _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
+      setState(() {
+        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _lightSubscription?.cancel();
+    super.dispose();
+  }
 
   void _onItemTapped(int index) {
     if (index == 1) {
@@ -62,20 +119,23 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
                     child: Text(
                       'Welcome, User!',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: _darkMode ? Colors.white : Colors.black,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage: AssetImage('assets/avatar.jpeg'),
                     radius: 30,
                   ),
@@ -97,9 +157,9 @@ class _HomePageState extends State<HomePage> {
             ),
             GridView.count(
               shrinkWrap:
-                  true, // Needed to make GridView work inside SingleChildScrollView
+                  true, // Necesario para que GridView funcione dentro de SingleChildScrollView
               physics:
-                  const NeverScrollableScrollPhysics(), // Disable scrolling inside GridView
+                  const NeverScrollableScrollPhysics(), // Deshabilita el desplazamiento dentro de GridView
               crossAxisCount: 2,
               childAspectRatio: 1.0,
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -149,42 +209,7 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         onItemSelected: _onItemTapped,
       ),
+      backgroundColor: _darkMode ? Colors.black : Colors.white,
     );
   }
 }
-
-class BottomBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onItemSelected;
-
-  const BottomBar({
-    super.key,
-    required this.currentIndex,
-    required this.onItemSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onItemSelected,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code),
-          label: 'QR',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
-        ),
-      ],
-      selectedItemColor: AppColors.primary,
-    );
-  }
-}
-
-// Asegúrate de tener una página TuiQrPage para manejar la vista de la TUI y el QR.
