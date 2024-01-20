@@ -15,6 +15,7 @@ class MapPage extends StatefulWidget {
       {super.key, required this.destLatitude, required this.destLongitude});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MapPageState createState() => _MapPageState();
 }
 
@@ -35,7 +36,7 @@ class _MapPageState extends State<MapPage> {
       Position position = await LocationService.determinePosition();
       return LatLng(position.latitude, position.longitude);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return const LatLng(0.0, 0.0);
     }
   }
@@ -72,23 +73,36 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void getCoordinates() async {
-    // Make sure currentLocation is not null
-    if (currentLocation == null) return;
+// Method to consume the OpenRouteService API
+  getCoordinates() async {
+    debugPrint("Starting to fetch coordinates");
 
-    var response = await http.get(getRouteUrl(
-        "${currentLocation!.latitude},${currentLocation!.longitude}",
-        "${widget.destLatitude},${widget.destLongitude}"));
-
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      var listOfPoints = data['features'][0]['geometry']['coordinates'];
-
-      setState(() {
-        points = listOfPoints
-            .map((p) => LatLng(p[1].toDouble(), p[0].toDouble()))
+    try {
+      var response = await http.get(
+          getRouteUrl(
+              "${currentLocation!.longitude},${currentLocation!.latitude}", // Ensure longitude comes first
+              "${widget.destLongitude},${widget.destLatitude}"), // Ensure longitude comes first
+          headers: {
+            "Accept":
+                "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8"
+          });
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        var coordinates =
+            data['features'][0]['geometry']['coordinates'] as List;
+        List<LatLng> newPoints = coordinates
+            .map((coordinate) =>
+                LatLng(coordinate[1].toDouble(), coordinate[0].toDouble()))
             .toList();
-      });
+        setState(() {
+          points = newPoints;
+        });
+      } else {
+        debugPrint("Failed to fetch data: ${response.statusCode}");
+        debugPrint("Error response body: ${response.body}");
+      }
+    } catch (e) {
+      debugPrint("Exception caught: $e");
     }
   }
 
