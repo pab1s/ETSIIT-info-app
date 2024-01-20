@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      appBar: const TopBar(title: "Login"),
+      appBar: const TopBar(title: "Iniciar sesión"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
               ),
-              child: const Text('Login'),
+              child: const Text('Iniciar sesión'),
             ),
             TextButton(
               onPressed: () {

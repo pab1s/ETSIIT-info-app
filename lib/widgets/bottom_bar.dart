@@ -19,7 +19,7 @@ class BottomBar extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home',
+          label: 'Inicio',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.qr_code),
@@ -27,7 +27,7 @@ class BottomBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
-          label: 'Map',
+          label: 'Mapa',
         ),
       ],
       selectedItemColor: AppColors.primary,

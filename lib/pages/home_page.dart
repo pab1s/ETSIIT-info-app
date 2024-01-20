@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      'Bienvenido, Jonathan Smith!',
+                      'Bienvenido, Jonathan!',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
