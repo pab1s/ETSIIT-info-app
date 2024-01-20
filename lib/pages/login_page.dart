@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      appBar: const TopBar(title: "Login"),
+      appBar: const TopBar(title: "Iniciar sesión"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -69,14 +69,14 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20),
             TextField(
               style: textStyle,
-              decoration: inputDecoration('Username'),
+              decoration: inputDecoration('Usuario'),
               cursorColor: _darkMode ? Colors.white : Colors.black,
             ),
             const SizedBox(height: 20),
             TextField(
               obscureText: true,
               style: textStyle,
-              decoration: inputDecoration('Password'),
+              decoration: inputDecoration('Contraseña'),
               cursorColor: _darkMode ? Colors.white : Colors.black,
             ),
             const SizedBox(height: 20),
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
               ),
-              child: const Text('Login'),
+              child: const Text('Iniciar sesión'),
             ),
             TextButton(
               onPressed: () {
@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.primary,
               ),
-              child: const Text('Access as a Guest'),
+              child: const Text('Acceder como invitado'),
             ),
           ],
         ),

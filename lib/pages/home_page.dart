@@ -30,7 +30,7 @@ class BottomBar extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home',
+          label: 'Inicio',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.qr_code),
@@ -38,7 +38,7 @@ class BottomBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
-          label: 'Map',
+          label: 'Mapa',
         ),
       ],
       selectedItemColor: AppColors.primary,
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(title: 'Home'),
+      appBar: const TopBar(title: 'Inicio'),
       drawer: const SideBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      'Welcome, User!',
+                      'Bienvenido, Jonathan!',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 _buildGridButton(
                   icon: Icons.location_on,
-                  label: 'Locations',
+                  label: 'Localizaciones',
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _buildGridButton(
                   icon: Icons.group,
-                  label: 'Clubs',
+                  label: 'Asignaturas',
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const ClubsPage()),
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _buildGridButton(
                   icon: Icons.schedule,
-                  label: 'Time Table',
+                  label: 'Horario',
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _buildGridButton(
                   icon: Icons.restaurant_menu,
-                  label: 'Places to Eat',
+                  label: 'Comedores',
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const MenuPage()),

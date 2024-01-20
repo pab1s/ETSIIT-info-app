@@ -17,7 +17,7 @@ class SideBar extends StatelessWidget {
               color: AppColors.primary,
             ),
             child: Text(
-              'College App',
+              'App Institucional',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -26,7 +26,7 @@ class SideBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
-            title: const Text('Log Out'),
+            title: const Text('Cerrar sesión'),
             onTap: () {
               Navigator.push(
                 context,
@@ -38,7 +38,7 @@ class SideBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('Profile'),
+            title: const Text('Perfil'),
             onTap: () {
               Navigator.push(
                 context,

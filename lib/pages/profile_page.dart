@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Profile Page',
+      title: 'Perfil',
       home: ProfilePage(),
     );
   }
@@ -45,7 +45,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const Text(
-                'Hogwarts',
+                'ETSIIT',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 20,
@@ -106,17 +106,17 @@ class ProfilePage extends StatelessWidget {
                     switch (index) {
                       case 0:
                         return const ClubCard(
-                            title: 'Coding Club',
+                            title: 'Club de progamación',
                             icon: Icons.computer,
                             color: Colors.black);
                       case 1:
                         return const ClubCard(
-                            title: 'PSM Club',
+                            title: 'Club PSM',
                             icon: Icons.book,
                             color: Colors.black);
                       case 2:
                         return const ClubCard(
-                            title: 'Cultural Club',
+                            title: 'Club Cultural',
                             icon: Icons.palette,
                             color: Colors.black);
                       default:
@@ -127,7 +127,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               const Text(
-                'COURSES',
+                'CURSOS',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: Colors.white,
