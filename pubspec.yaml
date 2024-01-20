@@ -46,6 +46,8 @@ dependencies:
   light: ^3.0.1
   pedometer: ^4.0.1
   permission_handler: ^11.2.0
+  flutter_map_animations: ^0.5.3
+  flutter_compass: ^0.8.0
 
 dev_dependencies:
   flutter_test:

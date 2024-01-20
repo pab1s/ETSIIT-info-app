@@ -94,6 +94,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_compass:
+    dependency: "direct main"
+    description:
+      name: flutter_compass
+      sha256: be642484f9f6975c1c6edff568281b001f2f1e604de27ecea18d97eebbdef22f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -110,6 +118,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  flutter_map_animations:
+    dependency: "direct main"
+    description:
+      name: flutter_map_animations
+      sha256: b21fbfc0694b68470d7c986009d5ad883c8841aded74fbc7b0f61db10f48c33f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
