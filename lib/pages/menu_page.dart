@@ -109,9 +109,9 @@ class _MenuPageState extends State<MenuPage> {
                                 onPressed: () {
                                   Navigator.pop(context); // Cierra el diálogo
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const MapPage(
-                                        destLatitude: 37.14832,
-                                        destLongitude: -3.60445),
+                                    builder: (_) => MapPage(
+                                        destLatitude: 37.19436,
+                                        destLongitude: -3.60441),
                                   ));
                                 },
                               ),

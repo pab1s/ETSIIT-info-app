@@ -15,12 +15,11 @@ class MapPage extends StatefulWidget {
       {super.key, required this.destLatitude, required this.destLongitude});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  late LatLng? currentLocation;
+  LatLng? currentLocation;
   late Marker originMarker;
   late Marker destinationMarker;
   List<LatLng> points = [];
@@ -36,15 +35,15 @@ class _MapPageState extends State<MapPage> {
       Position position = await LocationService.determinePosition();
       return LatLng(position.latitude, position.longitude);
     } catch (e) {
-      // You can handle the error more gracefully or return a default location
       print(e);
       return const LatLng(0.0, 0.0);
     }
   }
 
   void _determineCurrentLocation() async {
-    currentLocation = await _getLocation();
+    LatLng location = await _getLocation();
     setState(() {
+      currentLocation = location;
       // Set up the origin marker
       originMarker = Marker(
         point: currentLocation!,
@@ -69,19 +68,22 @@ class _MapPageState extends State<MapPage> {
         ),
       );
 
-      // Call the API to get the route
       getCoordinates();
     });
   }
 
-  // Method to consume the OpenRouteService API
-  getCoordinates() async {
+  void getCoordinates() async {
+    // Make sure currentLocation is not null
+    if (currentLocation == null) return;
+
     var response = await http.get(getRouteUrl(
         "${currentLocation!.latitude},${currentLocation!.longitude}",
         "${widget.destLatitude},${widget.destLongitude}"));
+
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var listOfPoints = data['features'][0]['geometry']['coordinates'];
+
       setState(() {
         points = listOfPoints
             .map((p) => LatLng(p[1].toDouble(), p[0].toDouble()))
@@ -103,7 +105,7 @@ class _MapPageState extends State<MapPage> {
           FlutterMap(
             options: MapOptions(
               initialCenter: currentLocation!,
-              initialZoom: 16.5,
+              initialZoom: 14,
             ),
             children: [
               TileLayer(
@@ -111,10 +113,23 @@ class _MapPageState extends State<MapPage> {
                 userAgentPackageName: 'com.example.app',
               ),
               MarkerLayer(markers: [originMarker, destinationMarker]),
-              // Other layers like PolylineLayer for the route can be added here
+              PolylineLayer(
+                polylineCulling: false,
+                polylines: [
+                  Polyline(points: points, color: Colors.black, strokeWidth: 5),
+                ],
+              ),
             ],
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blueAccent,
+        onPressed: () => getCoordinates(),
+        child: const Icon(
+          Icons.route,
+          color: Colors.white,
+        ),
       ),
     );
   }
