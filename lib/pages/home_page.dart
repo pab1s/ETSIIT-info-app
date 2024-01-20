@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -22,7 +23,9 @@ class _HomePageState extends State<HomePage> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const TuiQrPage()), // Asegúrate de tener TuiQrPage
+        MaterialPageRoute(
+            builder: (context) =>
+                const TuiQrPage()), // Asegúrate de tener TuiQrPage
       );
     }
     setState(() {
@@ -30,7 +33,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget _buildGridButton({required IconData icon, required String label, required VoidCallback onTap}) {
+  Widget _buildGridButton(
+      {required IconData icon,
+      required String label,
+      required VoidCallback onTap}) {
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -56,7 +62,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-                 const Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,8 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   CircleAvatar(
-                    backgroundImage: AssetImage(
-                        'assets/avatar.jpeg'), // Use avatar image from assets
+                    backgroundImage: AssetImage('assets/avatar.jpeg'),
                     radius: 30,
                   ),
                 ],
@@ -106,7 +111,8 @@ class _HomePageState extends State<HomePage> {
                   label: 'Locations',
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LocationsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const LocationsPage()),
                   ),
                 ),
                 _buildGridButton(
@@ -123,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  const TimeTableCalendar()),
+                        builder: (context) => const TimeTableCalendar()),
                   ),
                 ),
                 _buildGridButton(
