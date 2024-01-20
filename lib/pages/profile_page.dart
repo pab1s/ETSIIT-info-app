@@ -45,7 +45,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const Text(
-                'Hogwarts',
+                'ETSIIT',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 20,
@@ -106,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                     switch (index) {
                       case 0:
                         return const ClubCard(
-                            title: 'Club de progamadores',
+                            title: 'Club de progamación',
                             icon: Icons.computer,
                             color: Colors.black);
                       case 1:
@@ -127,7 +127,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               const Text(
-                'COURSES',
+                'CURSOS',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: Colors.white,
