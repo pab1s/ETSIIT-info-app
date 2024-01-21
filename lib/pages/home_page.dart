@@ -10,6 +10,7 @@ import 'clubs_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
 import 'tuiqr_page.dart';
+import 'mapa_page.dart';
 
 // La clase BottomBar debe estar fuera de la clase HomePage
 class BottomBar extends StatelessWidget {
@@ -80,9 +81,14 @@ class _HomePageState extends State<HomePage> {
     if (index == 1) {
       Navigator.push(
         context,
+        MaterialPageRoute(builder: (context) => const TuiQrPage()),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
         MaterialPageRoute(
-            builder: (context) =>
-                const TuiQrPage()), // Asegúrate de tener TuiQrPage
+          builder: (context) => const MapaPage(),
+        ),
       );
     }
     setState(() {
