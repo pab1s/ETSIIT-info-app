@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../widgets/top_bar.dart';
 
-class ClubsPage extends StatelessWidget {
-  const ClubsPage({super.key});
+class SubjectsPage extends StatelessWidget {
+  const SubjectsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: TopBar(title: 'Locations'),
+      appBar: TopBar(title: 'Subjects'),
       body: Center(
-        child: Text('Locations Page Content'),
+        child: Text('Subjects Page Content'),
       ),
     );
   }
