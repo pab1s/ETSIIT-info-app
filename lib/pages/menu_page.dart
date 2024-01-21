@@ -76,13 +76,12 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Places to Eat'),
+        title: const Text('Comedores'),
+        backgroundColor: const Color.fromRGBO(255, 152, 0, 1),
       ),
       body: Column(
         children: [
-          const SizedBox(
-              height:
-                  150), // Ajusta este valor para controlar el espacio superior
+          const SizedBox(height: 150),
           CarouselSlider(
             carouselController: _carouselController,
             options: CarouselOptions(
@@ -168,7 +167,7 @@ class _MenuPageState extends State<MenuPage> {
 
 void main() {
   runApp(const MaterialApp(
-    title: 'Dining Options App',
+    title: 'Opciones del menú',
     home: MenuPage(),
   ));
 }

@@ -106,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                     switch (index) {
                       case 0:
                         return const ClubCard(
-                            title: 'Club de progamación',
+                            title: 'Software libre',
                             icon: Icons.computer,
                             color: Colors.black);
                       case 1:
