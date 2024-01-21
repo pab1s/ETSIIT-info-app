@@ -6,7 +6,7 @@ import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
 import '../utils/colors.dart';
 import 'locations_page.dart';
-import 'clubs_page.dart';
+import 'subjects_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
 import 'tuiqr_page.dart';
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                   label: 'Asignaturas',
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ClubsPage()),
+                    MaterialPageRoute(builder: (context) => const SubjectsPage()),
                   ),
                 ),
                 _buildGridButton(
