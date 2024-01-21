@@ -8,6 +8,9 @@ import 'package:pedometer/pedometer.dart';
 import 'map_page.dart';
 import '../utils/location_service.dart';
 import '../utils/pedometer_service.dart';
+import '../widgets/bottom_bar.dart';
+import 'home_page.dart';
+import 'tuiqr_page.dart';
 
 class MapaPage extends StatefulWidget {
   const MapaPage({super.key});
@@ -18,6 +21,7 @@ class MapaPage extends StatefulWidget {
 }
 
 class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
+  int _selectedIndex = 2;
   double _zoomLevel = 16; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;
@@ -64,6 +68,32 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
     _animatedMapController.dispose();
     animationController.dispose();
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const TuiQrPage()),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MapaPage(),
+        ),
+      );
+    } else if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   void _initializeFeaturesAfterPermission() async {
@@ -364,6 +394,10 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             destinationMarker6
           ]),
         ],
+      ),
+      bottomNavigationBar: BottomBar(
+        currentIndex: _selectedIndex,
+        onItemSelected: _onItemTapped,
       ),
     );
   }

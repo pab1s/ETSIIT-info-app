@@ -4,48 +4,13 @@ import 'package:light/light.dart';
 // Importa tus widgets y páginas personalizadas aquí
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
-import '../utils/colors.dart';
+import '../widgets/bottom_bar.dart';
 import 'locations_page.dart';
 import 'subjects_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
 import 'tuiqr_page.dart';
 import 'mapa_page.dart';
-
-// La clase BottomBar debe estar fuera de la clase HomePage
-class BottomBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onItemSelected;
-
-  const BottomBar({
-    super.key,
-    required this.currentIndex,
-    required this.onItemSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onItemSelected,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Inicio',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code),
-          label: 'QR',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Mapa',
-        ),
-      ],
-      selectedItemColor: AppColors.primary,
-    );
-  }
-}
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,6 +53,13 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(
           builder: (context) => const MapaPage(),
+        ),
+      );
+    } else if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
         ),
       );
     }
@@ -186,7 +158,8 @@ class _HomePageState extends State<HomePage> {
                   label: 'Asignaturas',
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SubjectsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const SubjectsPage()),
                   ),
                 ),
                 _buildGridButton(

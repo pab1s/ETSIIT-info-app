@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:light/light.dart'; // Importa el paquete light
+import '../widgets/bottom_bar.dart';
+import 'package:light/light.dart';
+import 'home_page.dart';
+import 'mapa_page.dart';
 
 class TuiQrPage extends StatefulWidget {
   const TuiQrPage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class TuiQrPage extends StatefulWidget {
 }
 
 class _TuiQrPageState extends State<TuiQrPage> {
+  int _selectedIndex = 1;
   Light? _light;
   StreamSubscription? _lightSubscription;
   bool _darkMode = false;
@@ -30,6 +33,32 @@ class _TuiQrPageState extends State<TuiQrPage> {
   void dispose() {
     _lightSubscription?.cancel();
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const TuiQrPage()),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MapaPage(),
+        ),
+      );
+    } else if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -68,6 +97,10 @@ class _TuiQrPageState extends State<TuiQrPage> {
               // Los botones de expandir han sido eliminados
             ],
           ),
+        ),
+        bottomNavigationBar: BottomBar(
+          currentIndex: _selectedIndex,
+          onItemSelected: _onItemTapped,
         ),
       ),
     );
