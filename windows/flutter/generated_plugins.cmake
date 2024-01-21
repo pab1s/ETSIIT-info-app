@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  dialogflow_grpc
+  flutter_tts
   geolocator_windows
   permission_handler_windows
 )
