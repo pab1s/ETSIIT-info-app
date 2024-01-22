@@ -41,35 +41,34 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    Color? iconColor =
-        _darkMode ? Colors.white : null; // Color blanco en modo oscuro
-    Color? textColor =
-        _darkMode ? Colors.white : null; // Color blanco en modo oscuro
+    Color? iconColor = _darkMode ? Colors.white : null;
+    Color? textColor = _darkMode ? Colors.white : null;
 
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onItemSelected,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: iconColor), // Cambiar color del ícono
+          icon: Icon(Icons.home, color: iconColor),
           label: 'Inicio',
         ),
         BottomNavigationBarItem(
-          icon:
-              Icon(Icons.qr_code, color: iconColor), // Cambiar color del ícono
+          icon: Icon(Icons.qr_code, color: iconColor),
           label: 'QR',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map, color: iconColor), // Cambiar color del ícono
+          icon: Icon(Icons.map, color: iconColor),
           label: 'Mapa',
         ),
+        // Nuevo botón de Asistente
+        BottomNavigationBarItem(
+          icon: Icon(Icons.mic, color: iconColor),
+          label: 'Asistente',
+        ),
       ],
-      selectedItemColor: _darkMode
-          ? Colors.orange
-          : AppColors.primary, // Color naranja en modo oscuro
-      backgroundColor:
-          _darkMode ? Colors.grey : null, // Fondo gris en modo oscuro
-      unselectedItemColor: textColor, // Cambiar color del texto
+      selectedItemColor: _darkMode ? Colors.orange : AppColors.primary,
+      backgroundColor: _darkMode ? Colors.grey : null,
+      unselectedItemColor: textColor,
     );
   }
 }

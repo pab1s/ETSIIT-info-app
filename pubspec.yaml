@@ -48,7 +48,7 @@ dependencies:
   permission_handler: ^11.2.0
   flutter_map_animations: ^0.5.3
   flutter_compass: ^0.8.0
-  dialogflow_grpc: ^0.2.9
+  dialogflow_grpc: ^0.2.8
   speech_to_text: ^6.5.1
   flutter_tts: ^3.8.5
 
