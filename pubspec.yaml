@@ -52,6 +52,7 @@ dependencies:
   speech_to_text: ^6.5.1
   flutter_tts: ^3.8.5
 
+  syncfusion_flutter_core: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

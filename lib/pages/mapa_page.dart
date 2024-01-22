@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
-import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:pedometer/pedometer.dart';
-import 'map_page.dart';
+import 'dart:async';
+
+import '../widgets/top_bar.dart';
 import '../utils/location_service.dart';
 import '../utils/pedometer_service.dart';
-import '../widgets/bottom_bar.dart';
-import 'home_page.dart';
-import 'tuiqr_page.dart';
+import 'map_page.dart';
 
 class MapaPage extends StatefulWidget {
   const MapaPage({super.key});
@@ -21,8 +20,7 @@ class MapaPage extends StatefulWidget {
 }
 
 class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
-  int _selectedIndex = 2;
-  double _zoomLevel = 16; // default zoom level
+  final double _zoomLevel = 16; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;
   late Marker destinationMarker1;
@@ -68,32 +66,6 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
     _animatedMapController.dispose();
     animationController.dispose();
     super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const TuiQrPage()),
-      );
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MapaPage(),
-        ),
-      );
-    } else if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-    }
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   void _initializeFeaturesAfterPermission() async {
@@ -160,9 +132,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             onTap: () {
               _showMarkerDialog(context, "Comedor PTS", latitude1, longitude1);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Color.fromARGB(255, 168, 42, 42),
@@ -187,9 +159,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             onTap: () {
               _showMarkerDialog(context, "ETSIIT", latitude2, longitude2);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Colors.blue,
@@ -215,9 +187,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
               _showMarkerDialog(
                   context, "ETSIIT Auxiliar", latitude3, longitude3);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Color.fromARGB(255, 9, 76, 131),
@@ -243,9 +215,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
               _showMarkerDialog(
                   context, "Comedor Ciencias", latitude4, longitude4);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Color.fromARGB(255, 33, 138, 156),
@@ -270,9 +242,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             onTap: () {
               _showMarkerDialog(context, "V Centenario", latitude5, longitude5);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Color.fromARGB(255, 99, 9, 9),
@@ -298,9 +270,9 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
               _showMarkerDialog(
                   context, "Facultad de Ciencias", latitude6, longitude6);
             },
-            child: Column(
+            child: const Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.location_on,
                   size: 40.0,
                   color: Color.fromARGB(255, 40, 80, 7),
@@ -340,13 +312,13 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             TextButton(
               child: const Text("No"),
               onPressed: () {
-                Navigator.of(context).pop(); // Cierra el cuadro de diálogo
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: const Text("Sí"),
               onPressed: () {
-                Navigator.of(context).pop(); // Cierra el cuadro de diálogo
+                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -373,6 +345,7 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
     }
 
     return Scaffold(
+      appBar: const TopBar(title: "Puntos de Interés"),
       body: FlutterMap(
         mapController: _animatedMapController.mapController,
         options: MapOptions(
@@ -394,10 +367,6 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
             destinationMarker6
           ]),
         ],
-      ),
-      bottomNavigationBar: BottomBar(
-        currentIndex: _selectedIndex,
-        onItemSelected: _onItemTapped,
       ),
     );
   }

@@ -37,6 +37,9 @@ class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: _darkMode
+          ? const Color(0xFF9E9E9E)
+          : Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -81,10 +84,7 @@ class _SideBarState extends State<SideBar> {
             },
           ),
         ],
-      ),
-      backgroundColor: _darkMode
-          ? const Color(0xFF9E9E9E)
-          : Colors.white, // Cambia el color de fondo en modo oscuro
+      ), // Cambia el color de fondo en modo oscuro
     );
   }
 }

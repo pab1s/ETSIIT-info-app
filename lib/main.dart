@@ -13,6 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'App Institucional',
       theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.orange,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.orange,
       ),
       home: const LoginPage(),

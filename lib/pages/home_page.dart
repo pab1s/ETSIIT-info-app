@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:light/light.dart';
-// Importa tus widgets y páginas personalizadas aquí
+
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
-import '../widgets/bottom_bar.dart';
-import 'dialogflow.dart';
 import 'locations_page.dart';
 import 'subjects_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
-import 'tuiqr_page.dart';
-import 'mapa_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
   Light? _light;
   StreamSubscription? _lightSubscription;
   bool _darkMode = false;
@@ -32,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     _light = Light();
     _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
       setState(() {
-        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+        _darkMode = luxValue < 100;
       });
     });
   }
@@ -41,39 +37,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _lightSubscription?.cancel();
     super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const TuiQrPage()),
-      );
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MapaPage(),
-        ),
-      );
-    } else if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-    } else if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-        builder: (context) => const ChatPage(),
-        ),
-      );
-    }
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   Widget _buildGridButton(
@@ -142,10 +105,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             GridView.count(
-              shrinkWrap:
-                  true, // Necesario para que GridView funcione dentro de SingleChildScrollView
-              physics:
-                  const NeverScrollableScrollPhysics(), // Deshabilita el desplazamiento dentro de GridView
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
               childAspectRatio: 1.0,
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -191,10 +152,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomBar(
-        currentIndex: _selectedIndex,
-        onItemSelected: _onItemTapped,
       ),
       backgroundColor: _darkMode ? Colors.black : Colors.white,
     );

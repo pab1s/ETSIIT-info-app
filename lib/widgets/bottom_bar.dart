@@ -8,12 +8,13 @@ class BottomBar extends StatefulWidget {
   final ValueChanged<int> onItemSelected;
 
   const BottomBar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onItemSelected,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _BottomBarState createState() => _BottomBarState();
 }
 
@@ -28,7 +29,7 @@ class _BottomBarState extends State<BottomBar> {
     _light = Light();
     _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
       setState(() {
-        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+        _darkMode = luxValue < 100;
       });
     });
   }
@@ -39,36 +40,39 @@ class _BottomBarState extends State<BottomBar> {
     super.dispose();
   }
 
+  Color getIconColor(int index) {
+    if (widget.currentIndex == index) {
+      return Colors.orange;
+    }
+    return _darkMode ? Colors.white : Colors.black;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Color? iconColor = _darkMode ? Colors.white : null;
-    Color? textColor = _darkMode ? Colors.white : null;
-
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onItemSelected,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: iconColor),
+          icon: Icon(Icons.home, color: getIconColor(0)),
           label: 'Inicio',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code, color: iconColor),
+          icon: Icon(Icons.qr_code, color: getIconColor(1)),
           label: 'QR',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.map, color: iconColor),
+          icon: Icon(Icons.map, color: getIconColor(2)),
           label: 'Mapa',
         ),
-        // Nuevo botón de Asistente
         BottomNavigationBarItem(
-          icon: Icon(Icons.mic, color: iconColor),
+          icon: Icon(Icons.mic, color: getIconColor(3)),
           label: 'Asistente',
         ),
       ],
-      selectedItemColor: _darkMode ? Colors.orange : AppColors.primary,
-      backgroundColor: _darkMode ? Colors.grey : null,
-      unselectedItemColor: textColor,
+      selectedItemColor: Colors.orange,
+      backgroundColor: _darkMode ? const Color.fromARGB(255, 53, 53, 53) : null,
+      unselectedItemColor: _darkMode ? Colors.white : Colors.black,
     );
   }
 }

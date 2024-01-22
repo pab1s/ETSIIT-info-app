@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'dart:async';
 import 'package:light/light.dart';

@@ -26,7 +26,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
-  double _zoomLevel = 16; // default zoom level
+  final double _zoomLevel = 16; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;
   late Marker destinationMarker;

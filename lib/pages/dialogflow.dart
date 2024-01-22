@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:dialogflow_grpc/dialogflow_grpc.dart';
 import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2beta1/session.pb.dart';
-import '../widgets/bottom_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
+import '../widgets/top_bar.dart';
+
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({super.key});
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -29,6 +30,7 @@ class _ChatPageState extends State<ChatPage> {
     initTts();
     _initSpeechToText();
   }
+
   Future<void> _initSpeechToText() async {
     _speech = stt.SpeechToText();
     try {
@@ -48,10 +50,12 @@ class _ChatPageState extends State<ChatPage> {
     if (available ?? false) {
       setState(() => _isListening = true); // Habilita el botón de micrófono
       try {
-        _speech?.listen(onResult: (val) => setState(() {
-          _textController.text = val.recognizedWords;
-          _isListening = false; // Desactiva el botón de micrófono después de recibir el resultado
-        }));
+        _speech?.listen(
+            onResult: (val) => setState(() {
+                  _textController.text = val.recognizedWords;
+                  _isListening =
+                      false; // Desactiva el botón de micrófono después de recibir el resultado
+                }));
       } catch (e) {
         print("Error al empezar a escuchar: $e");
         setState(() => _isListening = false);
@@ -82,7 +86,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> initDialogflow() async {
     final serviceAccount = ServiceAccount.fromString(
-      '${await rootBundle.loadString('assets/dialogflowetsiit-3520cf6a0872.json')}',
+      await rootBundle.loadString('assets/dialogflowetsiit-3520cf6a0872.json'),
     );
     dialogflow = DialogflowGrpcV2Beta1.viaServiceAccount(serviceAccount);
   }
@@ -116,8 +120,8 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat Asistente'),
+      appBar: const TopBar(
+        title: "Asistente Chat",
       ),
       body: Column(
         children: <Widget>[
@@ -137,18 +141,12 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          Divider(height: 1.0),
+          const Divider(height: 1.0),
           Container(
             decoration: BoxDecoration(color: Theme.of(context).cardColor),
             child: _buildTextComposer(),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomBar(
-        currentIndex: 2,
-        onItemSelected: (index) {
-          // Aquí manejas la navegación
-        },
       ),
     );
   }
@@ -164,7 +162,8 @@ class _ChatPageState extends State<ChatPage> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(hintText: "Enviar mensaje"),
+                decoration:
+                    const InputDecoration.collapsed(hintText: "Enviar mensaje"),
               ),
             ),
             IconButton(

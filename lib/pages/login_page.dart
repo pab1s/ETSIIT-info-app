@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/top_bar.dart';
 import '../utils/colors.dart';
-import 'home_page.dart';
+import 'main_page.dart';
 import 'dart:async';
 import 'package:light/light.dart';
 
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => MainPage()),
                 );
               },
               style: TextButton.styleFrom(
