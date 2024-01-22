@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'menudetails_page.dart';
-import 'map_page.dart';
+import 'navigation_page.dart';
 import 'package:light/light.dart';
 
 class MenuPage extends StatefulWidget {
@@ -118,7 +118,7 @@ class _MenuPageState extends State<MenuPage> {
                                 onPressed: () {
                                   Navigator.pop(context); // Cierra el diálogo
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const MapPage(
+                                    builder: (_) => const NavigationPage(
                                         destLatitude: 37.19436,
                                         destLongitude: -3.60441),
                                   ));

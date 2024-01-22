@@ -13,19 +13,20 @@ import '../interface/api.dart';
 import '../utils/location_service.dart';
 import '../utils/pedometer_service.dart';
 
-class MapPage extends StatefulWidget {
+class NavigationPage extends StatefulWidget {
   final double destLatitude;
   final double destLongitude;
 
-  const MapPage(
+  const NavigationPage(
       {super.key, required this.destLatitude, required this.destLongitude});
 
   @override
   // ignore: library_private_types_in_public_api
-  _MapPageState createState() => _MapPageState();
+  _NavigationPageState createState() => _NavigationPageState();
 }
 
-class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
+class _NavigationPageState extends State<NavigationPage>
+    with TickerProviderStateMixin {
   final double _zoomLevel = 16; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;

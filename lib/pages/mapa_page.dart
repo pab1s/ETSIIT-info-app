@@ -9,7 +9,7 @@ import 'dart:async';
 import '../widgets/top_bar.dart';
 import '../utils/location_service.dart';
 import '../utils/pedometer_service.dart';
-import 'map_page.dart';
+import 'navigation_page.dart';
 
 class MapaPage extends StatefulWidget {
   const MapaPage({super.key});
@@ -322,7 +322,7 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MapPage(
+                    builder: (context) => NavigationPage(
                       destLatitude: lat,
                       destLongitude: lon,
                     ),

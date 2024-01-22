@@ -51,8 +51,12 @@ dependencies:
   dialogflow_grpc: ^0.2.8
   speech_to_text: ^6.5.1
   flutter_tts: ^3.8.5
-
+  flutter_pixelmatching: ^1.0.0
   syncfusion_flutter_core: any
+  camera: ^0.10.5+9
+  image: ^4.1.4
+
+  image_picker: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -84,6 +88,7 @@ flutter:
     - assets/tui.jpg
     - assets/luiscrespo-QR.png
     - assets/dialogflowetsiit-3520cf6a0872.json
+    - assets/indoor/lab/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

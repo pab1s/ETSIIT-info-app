@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Import other pages similarly
+import 'home_page.dart';
 import 'tuiqr_page.dart';
 import 'mapa_page.dart';
 import 'dialogflow.dart';
-import '../widgets/bottom_bar.dart'; // Your custom BottomBar widget
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

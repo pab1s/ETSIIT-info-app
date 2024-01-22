@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:etsiit_info_app/utils/colors.dart';
 import 'dart:async';
 import 'package:light/light.dart';
 
@@ -14,7 +13,6 @@ class BottomBar extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _BottomBarState createState() => _BottomBarState();
 }
 
@@ -40,39 +38,50 @@ class _BottomBarState extends State<BottomBar> {
     super.dispose();
   }
 
-  Color getIconColor(int index) {
-    if (widget.currentIndex == index) {
-      return Colors.orange;
-    }
-    return _darkMode ? Colors.white : Colors.black;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: widget.currentIndex,
-      onTap: widget.onItemSelected,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: getIconColor(0)),
-          label: 'Inicio',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code, color: getIconColor(1)),
-          label: 'QR',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map, color: getIconColor(2)),
-          label: 'Mapa',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.mic, color: getIconColor(3)),
-          label: 'Asistente',
-        ),
-      ],
-      selectedItemColor: Colors.orange,
-      backgroundColor: _darkMode ? const Color.fromARGB(255, 53, 53, 53) : null,
-      unselectedItemColor: _darkMode ? Colors.white : Colors.black,
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      notchMargin: 6.0,
+      color: _darkMode ? const Color.fromARGB(255, 53, 53, 53) : Colors.orange,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          _buildBottomBarItem(Icons.home, 'Inicio', 0),
+          _buildBottomBarItem(Icons.qr_code, 'QR', 1),
+          const Spacer(), // This creates a space between the items
+          _buildBottomBarItem(Icons.map, 'Mapa', 2),
+          _buildBottomBarItem(Icons.mic, 'Asistente', 3),
+        ],
+      ),
     );
+  }
+
+  Widget _buildBottomBarItem(IconData icon, String label, int index) {
+    return IconButton(
+      icon: widget.currentIndex == index
+          ? Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color:
+                    Colors.deepOrange, // Darker orange circle for selected item
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(icon, color: Colors.white),
+              ),
+            )
+          : Icon(icon, color: getIconColor(index)),
+      onPressed: () => widget.onItemSelected(index),
+    );
+  }
+
+  Color getIconColor(int index) {
+    if (widget.currentIndex == index) {
+      return Colors
+          .transparent; // Make it transparent to hide the icon when selected
+    }
+    return _darkMode ? Colors.white : Colors.black;
   }
 }

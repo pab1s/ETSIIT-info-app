@@ -4,7 +4,7 @@ import 'package:light/light.dart';
 
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
-import 'locations_page.dart';
+import 'indoor_navigation_page.dart';
 import 'subjects_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
@@ -119,7 +119,8 @@ class _HomePageState extends State<HomePage> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const LocationsPage()),
+                        builder: (context) =>
+                            const IndoorNavPage(subfolderName: "lab")),
                   ),
                 ),
                 _buildGridButton(
