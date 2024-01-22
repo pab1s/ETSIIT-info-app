@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+ 
 class Course {
   final String title;
   final IconData icon;
@@ -11,6 +11,8 @@ class Course {
   final String professor;
   final String aula;
   final Color color;
+  final String professorOffice; 
+  final String professorImage;
 
   Course({
     required this.title, 
@@ -23,6 +25,8 @@ class Course {
     required this.endMinute,
     required this.professor,
     required this.aula,
+    required this.professorOffice,
+    required this.professorImage,
     });
 }
 
@@ -47,6 +51,8 @@ class CoursesProvider {
       endMinute: 30,
       professor: 'Cortijo Bon',
       aula: '1.6',
+      professorOffice: 'D29 Etsiit',
+      professorImage: 'assets/cortijo.png', //
     ),
     Course(
       title: 'PL - Teoría',
@@ -57,8 +63,10 @@ class CoursesProvider {
       startMinute: 30,
       endHour: 13,
       endMinute: 30,
-      professor: 'Ramon Lopez',
+      professor: 'Ramón López-Cózar Delgado',
       aula: '1.2',
+      professorOffice: 'Etsiit Desp. 26 3ª Planta', 
+      professorImage: 'assets/ramon.png', 
     ),
     Course(
       title: 'PDOO - Prácticas A1',
@@ -69,8 +77,10 @@ class CoursesProvider {
       startMinute: 30,
       endHour: 13,
       endMinute: 30,
-      professor: 'Nombre del Profesor',
-      aula: 'Aula de Prácticas',
+      professor: 'Juan Ruiz De Miras',
+      aula: '3.6',
+      professorOffice: 'Etsiit D 30 3ª Planta', 
+      professorImage: 'assets/juan.png', 
     ),
     Course(
       title: 'PL - Prácticas A2',
@@ -81,8 +91,10 @@ class CoursesProvider {
       startMinute: 30,
       endHour: 11,
       endMinute: 30,
-      professor: 'Nombre del Profesor',
-      aula: 'Aula de Prácticas',
+      professor: 'Ramón López-Cózar Delgado',
+      aula: '3.1',
+      professorOffice: 'Etsiit Desp. 26 3ª Planta', 
+      professorImage: 'assets/ramon.png', 
     ),
     Course(
       title: 'SO - Teoría',
@@ -93,8 +105,10 @@ class CoursesProvider {
       startMinute: 30,
       endHour: 11,
       endMinute: 30,
-      professor: 'Nombre del Profesor SO',
-      aula: 'Aula SO',
+      professor: 'Alejandro Jose Leon Salas',
+      aula: '0.2',
+      professorOffice: '', 
+      professorImage: '', 
     ),
     Course(
       title: 'SO - Prácticas D3',
@@ -105,8 +119,10 @@ class CoursesProvider {
       startMinute: 30,
       endHour: 13,
       endMinute: 30,
-      professor: 'Nombre del Profesor SO',
-      aula: 'Aula de Prácticas SO',
+      professor: 'Alejandro Jose Leon Salas',
+      aula: '2.5',
+      professorOffice: '', 
+      professorImage: '', 
     ),
     Course(
       title: 'ISE - Teoría',
@@ -119,23 +135,27 @@ class CoursesProvider {
       endMinute: 30,
       professor: 'Hector Pomares',
       aula: '0.1',
+      professorOffice: '', 
+      professorImage: '', 
     ),
     Course(
       title: 'VC - Prácticas A2',
       icon: Icons.visibility,
-      color: const Color.fromARGB(255, 204, 180, 0),
+      color: Color.fromARGB(255, 219, 197, 36),
       dayOfWeek: DateTime.thursday,
       startHour: 11,
       startMinute: 30,
       endHour: 13,
       endMinute: 30,
-      professor: 'Nombre del Profesor VC',
-      aula: 'Aula de Prácticas VC',
+      professor: 'Pablo Mesejo',
+      aula: '1.7',
+      professorOffice: '', 
+      professorImage: '', 
     ),
     Course(
       title: 'ISE - Prácticas A2',
       icon: Icons.business,
-      color: const Color.fromARGB(255, 138, 43, 226),
+      color: Color.fromARGB(255, 124, 52, 193),
       dayOfWeek: DateTime.friday,
       startHour: 11,
       startMinute: 30,
@@ -143,18 +163,22 @@ class CoursesProvider {
       endMinute: 30,
       professor: 'Alberto Guillen',
       aula: '1.4',
+      professorOffice: '', 
+      professorImage: '', 
     ),
     Course(
       title: 'VC - Teoría',
       icon: Icons.visibility,
-      color: const Color.fromARGB(255, 204, 180, 0),
+      color: Color.fromARGB(255, 255, 226, 3),
       dayOfWeek: DateTime.friday,
       startHour: 9,
       startMinute: 30,
       endHour: 11,
       endMinute: 30,
-      professor: 'Nombre del Profesor VC',
-      aula: 'Aula VC',
+      professor: 'Pablo Mesejo',
+      aula: '0.3',
+      professorOffice: '', 
+      professorImage: '', 
     ),
   ];
 
