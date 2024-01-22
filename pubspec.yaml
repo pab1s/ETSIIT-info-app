@@ -82,6 +82,7 @@ flutter:
     - assets/compass.png
     - assets/tui.jpg
     - assets/luiscrespo-QR.png
+    - assets/dialogflowetsiit-3520cf6a0872.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

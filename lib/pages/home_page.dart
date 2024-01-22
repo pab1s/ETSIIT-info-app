@@ -5,6 +5,7 @@ import 'package:light/light.dart';
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
 import '../widgets/bottom_bar.dart';
+import 'dialogflow.dart';
 import 'locations_page.dart';
 import 'subjects_page.dart';
 import 'time_table_page.dart';
@@ -60,6 +61,13 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(),
+        ),
+      );
+    } else if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+        builder: (context) => const ChatPage(),
         ),
       );
     }
