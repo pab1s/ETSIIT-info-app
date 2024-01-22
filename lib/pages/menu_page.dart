@@ -18,6 +18,8 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   late CarouselController _carouselController;
   StreamSubscription<AccelerometerEvent>? _streamSubscription;
+  int? expandedDiningOptionIndex;
+  int _currentCarouselIndex = 0;
   Light? _light;
   StreamSubscription? _lightSubscription;
   bool _darkMode = false;
@@ -38,7 +40,6 @@ class _MenuPageState extends State<MenuPage> {
         menuDetails: menutext,
         latitude: lat,
         longitude: longi),
-    // Añade más opciones según sea necesario
   ];
 
   @override
@@ -48,7 +49,7 @@ class _MenuPageState extends State<MenuPage> {
     _light = Light();
     _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
       setState(() {
-        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+        _darkMode = luxValue < 100;
       });
     });
     _streamSubscription = accelerometerEventStream().listen(
@@ -90,48 +91,32 @@ class _MenuPageState extends State<MenuPage> {
               height: 300,
               viewportFraction: 0.9,
               aspectRatio: 2.0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentCarouselIndex = index;
+                  if (expandedDiningOptionIndex != null) {
+                    expandedDiningOptionIndex = index;
+                  }
+                });
+              },
             ),
-            items: diningOptions.map((diningOption) {
+            items: List.generate(diningOptions.length, (index) {
+              DiningOption diningOption = diningOptions[index];
               return Builder(
                 builder: (BuildContext context) {
                   return GestureDetector(
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(diningOption.name),
-                            content: const Text("Selecciona una opción"),
-                            actions: <Widget>[
-                              TextButton(
-                                child: const Text("Ver Menú"),
-                                onPressed: () {
-                                  Navigator.pop(context); // Cierra el diálogo
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => MenuDetailsPage(
-                                        diningOption: diningOption),
-                                  ));
-                                },
-                              ),
-                              TextButton(
-                                child: const Text("Ver Direccion"),
-                                onPressed: () {
-                                  Navigator.pop(context); // Cierra el diálogo
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const NavigationPage(
-                                        destLatitude: 37.19436,
-                                        destLongitude: -3.60441),
-                                  ));
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      setState(() {
+                        if (expandedDiningOptionIndex == index) {
+                          expandedDiningOptionIndex = null;
+                        } else {
+                          expandedDiningOptionIndex = index;
+                        }
+                      });
                     },
                     child: Container(
-                      width: 300, // Ancho de la tarjeta
-                      height: 400, // Altura de la tarjeta
+                      width: 300,
+                      height: 400,
                       margin: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Card(
                         color: Colors.orange,
@@ -156,9 +141,44 @@ class _MenuPageState extends State<MenuPage> {
               );
             }).toList(),
           ),
+          if (expandedDiningOptionIndex != null)
+            _buildActionButtons(
+                context, diningOptions[expandedDiningOptionIndex!]),
         ],
       ),
       backgroundColor: _darkMode ? Colors.black : Colors.white,
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context, DiningOption diningOption) {
+    return Column(
+      children: [
+        ElevatedButton(
+          child: const Text(
+            "Ver Menú",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => MenuDetailsPage(diningOption: diningOption),
+            ));
+          },
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+        ),
+        ElevatedButton(
+          child: const Text(
+            "Ver Dirección",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => const NavigationPage(
+                  destLatitude: 37.19436, destLongitude: -3.60441),
+            ));
+          },
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+        ),
+      ],
     );
   }
 }
