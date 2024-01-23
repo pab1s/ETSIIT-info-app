@@ -40,48 +40,28 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 6.0,
-      color: _darkMode ? const Color.fromARGB(255, 53, 53, 53) : Colors.orange,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          _buildBottomBarItem(Icons.home, 'Inicio', 0),
-          _buildBottomBarItem(Icons.qr_code, 'QR', 1),
-          const Spacer(), // This creates a space between the items
-          _buildBottomBarItem(Icons.map, 'Mapa', 2),
-          _buildBottomBarItem(Icons.mic, 'Asistente', 3),
-        ],
-      ),
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor:
+          _darkMode ? const Color.fromARGB(255, 53, 53, 53) : Colors.orange,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: _darkMode ? Colors.white : Colors.black,
+      currentIndex: widget.currentIndex,
+      onTap: widget.onItemSelected,
+      items: [
+        _buildBottomNavigationBarItem(Icons.home, 'Inicio', 0),
+        _buildBottomNavigationBarItem(Icons.qr_code, 'QR', 1),
+        _buildBottomNavigationBarItem(Icons.map, 'Mapa', 2),
+        _buildBottomNavigationBarItem(Icons.mic, 'Asistente', 3),
+      ],
     );
   }
 
-  Widget _buildBottomBarItem(IconData icon, String label, int index) {
-    return IconButton(
-      icon: widget.currentIndex == index
-          ? Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color:
-                    Colors.deepOrange, // Darker orange circle for selected item
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(icon, color: Colors.white),
-              ),
-            )
-          : Icon(icon, color: getIconColor(index)),
-      onPressed: () => widget.onItemSelected(index),
+  BottomNavigationBarItem _buildBottomNavigationBarItem(
+      IconData icon, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: Icon(icon, size: 25.0),
+      label: widget.currentIndex == index ? label : '',
     );
-  }
-
-  Color getIconColor(int index) {
-    if (widget.currentIndex == index) {
-      return Colors
-          .transparent; // Make it transparent to hide the icon when selected
-    }
-    return _darkMode ? Colors.white : Colors.black;
   }
 }
