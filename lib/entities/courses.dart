@@ -141,7 +141,7 @@ class CoursesProvider {
     Course(
       title: 'VC - Prácticas A2',
       icon: Icons.visibility,
-      color: Color.fromARGB(255, 219, 197, 36),
+      color: const Color.fromARGB(255, 219, 197, 36),
       dayOfWeek: DateTime.thursday,
       startHour: 11,
       startMinute: 30,
@@ -155,7 +155,7 @@ class CoursesProvider {
     Course(
       title: 'ISE - Prácticas A2',
       icon: Icons.business,
-      color: Color.fromARGB(255, 124, 52, 193),
+      color: const Color.fromARGB(255, 124, 52, 193),
       dayOfWeek: DateTime.friday,
       startHour: 11,
       startMinute: 30,
@@ -169,7 +169,7 @@ class CoursesProvider {
     Course(
       title: 'VC - Teoría',
       icon: Icons.visibility,
-      color: Color.fromARGB(255, 255, 226, 3),
+      color: const Color.fromARGB(255, 255, 226, 3),
       dayOfWeek: DateTime.friday,
       startHour: 9,
       startMinute: 30,

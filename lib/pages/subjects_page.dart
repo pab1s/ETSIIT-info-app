@@ -1,6 +1,6 @@
 import 'package:etsiit_info_app/pages/profesordetails_page.dart';
 import 'package:flutter/material.dart';
-import '../widgets/top_bar.dart';
+// import '../widgets/top_bar.dart';
 import 'package:etsiit_info_app/entities/courses.dart';
 
 class SubjectsPage extends StatelessWidget {
@@ -13,13 +13,13 @@ class SubjectsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Subjects'),
-          backgroundColor: Colors.orange, // AppBar con fondo anaranjado
+          backgroundColor: Colors.orange,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Mis Asignaturas'),
               Tab(text: 'Mis Profesores'),
             ],
-            indicatorColor: Colors.white, // Color del indicador de la pestaña activa
+            indicatorColor: Colors.white,
           ),
         ),
         body: TabBarView(
@@ -48,27 +48,31 @@ class SubjectsPage extends StatelessWidget {
             'Profesor: ${courses[index].professor}\nAula: ${courses[index].aula}',
             style: TextStyle(color: courses[index].color.withOpacity(0.7)),
           ),
-          trailing: Icon(Icons.arrow_forward_ios, color: Colors.orange), // Ícono anaranjado
+          trailing: const Icon(Icons.arrow_forward_ios,
+              color: Colors.orange), // Ícono anaranjado
         );
       },
     );
   }
 
   Widget _buildProfessorsList(BuildContext context) {
-  List<Course> courses = CoursesProvider().getCourses();
-  Map<String, Course> professors = { for (var course in courses) course.professor: course };
+    List<Course> courses = CoursesProvider().getCourses();
+    Map<String, Course> professors = {
+      for (var course in courses) course.professor: course
+    };
 
-  return ListView(
-    children: professors.keys.map((professor) => ListTile(
-      title: Text(professor, style: TextStyle(color: Colors.orange)),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ProfessorDetailsPage(professorCourse: professors[professor]!),
-        ));
-      },
-    )).toList(),
-  );
+    return ListView(
+      children: professors.keys
+          .map((professor) => ListTile(
+                title: Text(professor, style: const TextStyle(color: Colors.orange)),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProfessorDetailsPage(
+                        professorCourse: professors[professor]!),
+                  ));
+                },
+              ))
+          .toList(),
+    );
+  }
 }
-
-}
-

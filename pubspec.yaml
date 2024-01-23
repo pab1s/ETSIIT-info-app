@@ -55,8 +55,8 @@ dependencies:
   syncfusion_flutter_core: any
   camera: ^0.10.5+9
   image: ^4.1.4
-
   image_picker: any
+  local_auth: ^2.1.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

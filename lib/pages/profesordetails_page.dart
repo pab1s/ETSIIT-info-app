@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class ProfessorDetailsPage extends StatelessWidget {
   final Course professorCourse;
 
-  const ProfessorDetailsPage({Key? key, required this.professorCourse})
-      : super(key: key);
+  const ProfessorDetailsPage({super.key, required this.professorCourse});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class ProfessorDetailsPage extends StatelessWidget {
         ),
         child: Center(
           child: Card(
-            margin: EdgeInsets.all(16.0),
+            margin: const EdgeInsets.all(16.0),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -36,7 +35,7 @@ class ProfessorDetailsPage extends StatelessWidget {
                     backgroundImage: AssetImage(professorCourse.professorImage),
                     backgroundColor: Colors.transparent,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     professorCourse.professor,
                     style: TextStyle(
@@ -45,15 +44,15 @@ class ProfessorDetailsPage extends StatelessWidget {
                       color: Colors.orange[800],
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.work, color: Colors.orange),
-                      SizedBox(width: 8),
+                      const Icon(Icons.work, color: Colors.orange),
+                      const SizedBox(width: 8),
                       Text(
                         'Despacho: ${professorCourse.professorOffice}',
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
