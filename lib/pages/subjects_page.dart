@@ -56,23 +56,33 @@ class SubjectsPage extends StatelessWidget {
   }
 
   Widget _buildProfessorsList(BuildContext context) {
-    List<Course> courses = CoursesProvider().getCourses();
-    Map<String, Course> professors = {
-      for (var course in courses) course.professor: course
-    };
+  List<Course> courses = CoursesProvider().getCourses();
+  Map<String, Course> professors = {
+    for (var course in courses) course.professor: course
+  };
 
-    return ListView(
-      children: professors.keys
-          .map((professor) => ListTile(
-                title: Text(professor, style: const TextStyle(color: Colors.orange)),
+  return ListView(
+    padding: const EdgeInsets.all(8.0),
+    children: professors.keys
+        .map((professor) => Card(
+              elevation: 4.0,
+              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              color: Colors.orange, // Color de fondo de la tarjeta
+              child: ListTile(
+                title: Text(
+                  professor,
+                  style: const TextStyle(color: Colors.black), // Texto en negro
+                ),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProfessorDetailsPage(
                         professorCourse: professors[professor]!),
                   ));
                 },
-              ))
-          .toList(),
-    );
-  }
+              ),
+            ))
+        .toList(),
+  );
+}
+
 }

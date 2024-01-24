@@ -138,7 +138,7 @@ class CalendarAppointment extends State<TimeTableCalendar> {
                 course.endHour, course.endMinute),
             subject: course.title,
             color: course.color,
-            notes: 'Profesor: ${course.professor}\nAula: ${course.aula}',
+            notes: 'Asignatura: ${course.nombreCompleto}\nProfesor: ${course.professor}\nAula: ${course.aula}',
           ));
         }
       }

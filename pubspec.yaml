@@ -89,9 +89,12 @@ flutter:
     - assets/luiscrespo-QR.png
     - assets/dialogflowetsiit-3520cf6a0872.json
     - assets/indoor/lab/
-    - assets/cortijo.png
-    - assets/juan.png
-    - assets/ramon.png
+    - assets/martos.png
+    - assets/paya.png
+    - assets/rojas.png
+    - assets/valdi.png
+    - assets/salas.png
+    - assets/npc.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
