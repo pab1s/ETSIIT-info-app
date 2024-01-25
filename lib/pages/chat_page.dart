@@ -6,6 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../widgets/top_bar.dart';
+import '../widgets/chat_bubble.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -15,7 +16,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final List<Map<String, dynamic>> _messages = [];
+  final List<ChatMessage> _messages = [];
   final TextEditingController _textController = TextEditingController();
   DialogflowGrpcV2Beta1? dialogflow;
   FlutterTts? flutterTts;
@@ -42,26 +43,25 @@ class _ChatPageState extends State<ChatPage> {
         _isListening = available ?? false;
       });
     } catch (e) {
-      print("Error al inicializar SpeechToText: $e");
+      print("Error initializing SpeechToText: $e");
     }
   }
 
   void startListening() async {
     if (available ?? false) {
-      setState(() => _isListening = true); // Habilita el botón de micrófono
+      setState(() => _isListening = true);
       try {
         _speech?.listen(
             onResult: (val) => setState(() {
                   _textController.text = val.recognizedWords;
-                  _isListening =
-                      false; // Desactiva el botón de micrófono después de recibir el resultado
+                  _isListening = false;
                 }));
       } catch (e) {
-        print("Error al empezar a escuchar: $e");
+        print("Error starting listening: $e");
         setState(() => _isListening = false);
       }
     } else {
-      print("El reconocimiento de voz no está disponible.");
+      print("Speech recognition not available.");
       setState(() => _isListening = false);
     }
   }
@@ -72,15 +72,15 @@ class _ChatPageState extends State<ChatPage> {
     flutterTts?.setLanguage("es-ES");
 
     flutterTts?.setStartHandler(() {
-      print("Reproducción de voz iniciada");
+      print("Voice playback started");
     });
 
     flutterTts?.setCompletionHandler(() {
-      print("Reproducción de voz completada");
+      print("Voice playback completed");
     });
 
     flutterTts?.setErrorHandler((msg) {
-      print("Error en la reproducción de voz: $msg");
+      print("Error in voice playback: $msg");
     });
   }
 
@@ -92,19 +92,30 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _handleSubmitted(String text) async {
-    print("Mensaje enviado: $text");
+    print("Message sent: $text");
     _textController.clear();
+
+    ChatMessage userMessage = ChatMessage(
+      text: text,
+      name: "You",
+      type: true,
+    );
+
     setState(() {
-      _messages.insert(0, {'text': text, 'isUserMessage': true});
+      _messages.insert(0, userMessage);
     });
 
-    // Enviar el mensaje a Dialogflow
     DetectIntentResponse response = await dialogflow!.detectIntent(text, 'es');
     String fulfillmentText = response.queryResult.fulfillmentText;
 
-    // Agregar la respuesta de Dialogflow a la lista de mensajes
+    ChatMessage botMessage = ChatMessage(
+      text: fulfillmentText,
+      name: "Bot",
+      type: false,
+    );
+
     setState(() {
-      _messages.insert(0, {'text': fulfillmentText, 'isUserMessage': false});
+      _messages.insert(0, botMessage);
     });
 
     await flutterTts?.speak(fulfillmentText);
@@ -121,7 +132,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBar(
-        title: "Asistente Chat",
+        title: "Juan, tu asistente personal",
       ),
       body: Column(
         children: <Widget>[
@@ -129,16 +140,7 @@ class _ChatPageState extends State<ChatPage> {
             child: ListView.builder(
               reverse: true,
               itemCount: _messages.length,
-              itemBuilder: (_, index) => ListTile(
-                title: Text(
-                  _messages[index]['text'],
-                  style: TextStyle(
-                    color: _messages[index]['isUserMessage']
-                        ? Colors.black
-                        : Colors.orange, // Respuestas de Dialogflow en naranja
-                  ),
-                ),
-              ),
+              itemBuilder: (_, index) => _messages[index],
             ),
           ),
           const Divider(height: 1.0),
@@ -155,15 +157,24 @@ class _ChatPageState extends State<ChatPage> {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(color: Colors.orangeAccent),
+        ),
         child: Row(
           children: <Widget>[
             Expanded(
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration:
-                    const InputDecoration.collapsed(hintText: "Enviar mensaje"),
+                decoration: InputDecoration.collapsed(
+                  hintText: "Envía un mensaje",
+                  hintStyle: TextStyle(color: Colors.grey),
+                ),
+                style: TextStyle(color: Colors.black),
               ),
             ),
             IconButton(

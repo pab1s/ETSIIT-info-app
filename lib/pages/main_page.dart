@@ -3,7 +3,7 @@ import '../widgets/bottom_bar.dart';
 import 'home_page.dart';
 import 'tuiqr_page.dart';
 import 'mapa_page.dart';
-import 'dialogflow.dart';
+import 'chat_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
