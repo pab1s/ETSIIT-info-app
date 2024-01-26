@@ -46,7 +46,7 @@ class _BottomBarState extends State<BottomBar> {
       backgroundColor:
           _darkMode ? const Color.fromARGB(255, 53, 53, 53) : Colors.orange,
       selectedItemColor: Colors.white,
-      unselectedItemColor: _darkMode ? Colors.white : Colors.black,
+      unselectedItemColor: _darkMode ? Colors.white : Colors.white,
       currentIndex: widget.currentIndex,
       onTap: widget.onItemSelected,
       items: [
