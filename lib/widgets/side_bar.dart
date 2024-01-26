@@ -9,7 +9,6 @@ class SideBar extends StatefulWidget {
   const SideBar({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SideBarState createState() => _SideBarState();
 }
 
@@ -24,7 +23,7 @@ class _SideBarState extends State<SideBar> {
     _light = Light();
     _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
       setState(() {
-        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+        _darkMode = luxValue < 100;
       });
     });
   }
@@ -42,20 +41,21 @@ class _SideBarState extends State<SideBar> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
               color: AppColors.primary,
             ),
             child: Text(
               'App Institucional',
               style: TextStyle(
-                color: Colors.white,
+                color: _darkMode ? Colors.black : Colors.white, // Inverse color
                 fontSize: 24,
               ),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.exit_to_app, color: Colors.white),
+            leading: Icon(Icons.exit_to_app,
+                color: _darkMode ? Colors.white : Colors.black),
             title: Text('Cerrar sesión',
                 style:
                     TextStyle(color: _darkMode ? Colors.white : Colors.black)),
@@ -69,7 +69,8 @@ class _SideBarState extends State<SideBar> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.person, color: Colors.white),
+            leading: Icon(Icons.person,
+                color: _darkMode ? Colors.white : Colors.black),
             title: Text('Perfil',
                 style:
                     TextStyle(color: _darkMode ? Colors.white : Colors.black)),
@@ -83,7 +84,7 @@ class _SideBarState extends State<SideBar> {
             },
           ),
         ],
-      ), // Cambia el color de fondo en modo oscuro
+      ),
     );
   }
 }
