@@ -154,22 +154,18 @@ class _MenuPageState extends State<MenuPage> {
     return Column(
       children: [
         ElevatedButton(
-          child: const Text(
-            "Ver Menú",
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => MenuDetailsPage(diningOption: diningOption),
             ));
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-        ),
-        ElevatedButton(
           child: const Text(
-            "Ver Dirección",
+            "Ver Menú",
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
+        ),
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => const NavigationPage(
@@ -177,6 +173,10 @@ class _MenuPageState extends State<MenuPage> {
             ));
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+          child: const Text(
+            "Ver Dirección",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
         ),
       ],
     );

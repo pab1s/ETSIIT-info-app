@@ -170,11 +170,11 @@ class _ChatPageState extends State<ChatPage> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(
+                decoration: const InputDecoration.collapsed(
                   hintText: "Envía un mensaje",
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             IconButton(

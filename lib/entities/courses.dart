@@ -1,4 +1,3 @@
-import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
  
 class Course {
@@ -76,7 +75,7 @@ class CoursesProvider {
     Course(
       title: 'EC - Teoria A',
       icon: Icons.computer,
-      color: Color.fromARGB(255, 11, 120, 18),
+      color: const Color.fromARGB(255, 11, 120, 18),
       dayOfWeek: DateTime.monday,
       startHour: 12,
       startMinute: 30,
@@ -106,7 +105,7 @@ class CoursesProvider {
     Course(
       title: 'ED - Practicas 1',
       icon: Icons.storage,
-      color: Color.fromARGB(255, 245, 227, 92),
+      color: const Color.fromARGB(255, 245, 227, 92),
       dayOfWeek: DateTime.tuesday,
       startHour: 8,
       startMinute: 30,
@@ -121,7 +120,7 @@ class CoursesProvider {
     Course(
       title: 'EC - Prácticas 1',
       icon: Icons.storage,
-      color: Color.fromARGB(255, 35, 177, 45),
+      color: const Color.fromARGB(255, 35, 177, 45),
       dayOfWeek: DateTime.tuesday,
       startHour: 9,
       startMinute: 30,
@@ -136,7 +135,7 @@ class CoursesProvider {
     Course(
       title: 'EC - Teoría A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 11, 120, 18),
+      color: const Color.fromARGB(255, 11, 120, 18),
       dayOfWeek: DateTime.tuesday,
       startHour: 11,
       startMinute: 30,
@@ -166,7 +165,7 @@ class CoursesProvider {
     Course(
       title: 'AM I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 68, 97, 241),
+      color: const Color.fromARGB(255, 68, 97, 241),
       dayOfWeek: DateTime.wednesday,
       startHour: 9,
       startMinute: 00,
@@ -181,7 +180,7 @@ class CoursesProvider {
     Course(
       title: 'AM I - Practicas 1',
       icon: Icons.business,
-      color: Color.fromARGB(255, 68, 160, 241),
+      color: const Color.fromARGB(255, 68, 160, 241),
       dayOfWeek: DateTime.wednesday,
       startHour: 10,
       startMinute: 00,
@@ -212,7 +211,7 @@ class CoursesProvider {
     Course(
       title: 'TOPO I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 249, 171, 3),
+      color: const Color.fromARGB(255, 249, 171, 3),
       dayOfWeek: DateTime.wednesday,
       startHour: 12,
       startMinute: 00,
@@ -227,7 +226,7 @@ class CoursesProvider {
     Course(
       title: 'AM I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 68, 97, 241),
+      color: const Color.fromARGB(255, 68, 97, 241),
       dayOfWeek: DateTime.thursday,
       startHour: 9,
       startMinute: 00,
@@ -257,7 +256,7 @@ class CoursesProvider {
     Course(
       title: 'GEO III - Practicas 1',
       icon: Icons.business,
-      color: Color.fromARGB(255, 148, 64, 226),
+      color: const Color.fromARGB(255, 148, 64, 226),
       dayOfWeek: DateTime.thursday,
       startHour: 11,
       startMinute: 00,
@@ -273,7 +272,7 @@ class CoursesProvider {
     Course(
       title: 'TOPO I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 249, 171, 3),
+      color: const Color.fromARGB(255, 249, 171, 3),
       dayOfWeek: DateTime.thursday,
       startHour: 12,
       startMinute: 00,
@@ -289,7 +288,7 @@ class CoursesProvider {
     Course(
       title: 'AM I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 68, 97, 241),
+      color: const Color.fromARGB(255, 68, 97, 241),
       dayOfWeek: DateTime.friday,
       startHour: 9,
       startMinute: 00,
@@ -319,7 +318,7 @@ class CoursesProvider {
     Course(
      title: 'TOPO I - Teoria A',
       icon: Icons.business,
-      color: Color.fromARGB(255, 249, 171, 3),
+      color: const Color.fromARGB(255, 249, 171, 3),
       dayOfWeek: DateTime.friday,
       startHour: 11,
       startMinute: 00,
@@ -335,7 +334,7 @@ class CoursesProvider {
     Course(
       title: 'TOPO I - Practicas 1',
       icon: Icons.business,
-      color: Color.fromARGB(255, 193, 148, 52),
+      color: const Color.fromARGB(255, 193, 148, 52),
       dayOfWeek: DateTime.friday,
       startHour: 12,
       startMinute: 00,
