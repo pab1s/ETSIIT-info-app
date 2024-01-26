@@ -338,39 +338,36 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (currentLocation == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: TopBar(title: "Puntos de Interés"),
       ),
-      body: FlutterMap(
-        mapController: _animatedMapController.mapController,
-        options: MapOptions(
-          initialCenter: currentLocation!,
-          initialZoom: _zoomLevel,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.app',
-          ),
-          MarkerLayer(markers: [
-            originMarker,
-            destinationMarker1,
-            destinationMarker2,
-            destinationMarker3,
-            destinationMarker4,
-            destinationMarker5,
-            destinationMarker6
-          ]),
-        ],
-      ),
+      body: currentLocation == null
+          ? const Center(child: CircularProgressIndicator())
+          : FlutterMap(
+              mapController: _animatedMapController.mapController,
+              options: MapOptions(
+                initialCenter: currentLocation!,
+                initialZoom: _zoomLevel,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate:
+                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.app',
+                ),
+                MarkerLayer(markers: [
+                  originMarker,
+                  destinationMarker1,
+                  destinationMarker2,
+                  destinationMarker3,
+                  destinationMarker4,
+                  destinationMarker5,
+                  destinationMarker6
+                ]),
+              ],
+            ),
     );
   }
 }

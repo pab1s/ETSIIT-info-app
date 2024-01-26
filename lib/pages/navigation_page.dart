@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:pedometer/pedometer.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../interface/api.dart';
 import '../utils/location_service.dart';
@@ -36,6 +37,8 @@ class _NavigationPageState extends State<NavigationPage>
   double _compassHeading = 0;
   StreamSubscription<StepCount>? _stepCountSubscription;
   final PedometerService _pedometerService = PedometerService();
+  FlutterTts flutterTts = FlutterTts();
+  String _currentInstruction = '';
   late AnimationController animationController;
   late Animation<double> sizeAnimation;
   late final _animatedMapController = AnimatedMapController(
@@ -49,6 +52,7 @@ class _NavigationPageState extends State<NavigationPage>
     super.initState();
     _initializeFeaturesAfterPermission();
     _listenToCompass();
+    _initializeTts();
 
     // Initialize animation controller and animation
     animationController = AnimationController(
@@ -69,7 +73,19 @@ class _NavigationPageState extends State<NavigationPage>
     _stepCountSubscription?.cancel();
     _animatedMapController.dispose();
     animationController.dispose();
+    flutterTts.stop();
     super.dispose();
+  }
+
+  void _initializeTts() {
+    flutterTts.setLanguage("en-US");
+    flutterTts.setPitch(1.0);
+  }
+
+  void _speak(String text) async {
+    if (text.isNotEmpty) {
+      await flutterTts.speak(text);
+    }
   }
 
   void _listenToCompass() {
@@ -197,6 +213,14 @@ class _NavigationPageState extends State<NavigationPage>
             .map((coordinate) =>
                 LatLng(coordinate[1].toDouble(), coordinate[0].toDouble()))
             .toList();
+        var segments = data['features'][0]['properties']['segments'];
+
+        if (segments.isNotEmpty) {
+          var steps = segments[0]['steps'] as List;
+          if (steps.isNotEmpty) {
+            _currentInstruction = steps[0]['instruction'];
+          }
+        }
 
         setState(() {
           points = newPoints;
@@ -281,9 +305,9 @@ class _NavigationPageState extends State<NavigationPage>
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blueAccent,
-        onPressed: getCoordinates,
-        child: const Icon(Icons.route, color: Colors.white),
+        backgroundColor: Colors.orange,
+        onPressed: () => _speak(_currentInstruction),
+        child: const Icon(Icons.volume_up, color: Colors.white),
       ),
     );
   }
