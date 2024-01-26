@@ -97,7 +97,7 @@ class _ChatPageState extends State<ChatPage> {
 
     ChatMessage userMessage = ChatMessage(
       text: text,
-      name: "You",
+      name: "Luis",
       type: true,
     );
 
@@ -131,8 +131,11 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(
-        title: "Juan, tu asistente personal",
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: TopBar(
+          title: "Juan, tu asistente personal",
+        ),
       ),
       body: Column(
         children: <Widget>[

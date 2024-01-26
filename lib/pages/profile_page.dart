@@ -33,10 +33,10 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 20),
               const CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/avatar.jpeg'),
+                backgroundImage: AssetImage('assets/user.jpg'),
               ),
               const Text(
-                'Jonathan Smith',
+                'Luis Crespo',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 25,

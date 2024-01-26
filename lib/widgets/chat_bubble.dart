@@ -57,7 +57,7 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16.0),
         child: const CircleAvatar(
           foregroundImage: AssetImage(
-            'assets/user.jpeg',
+            'assets/user.jpg',
           ),
         ),
       ),
