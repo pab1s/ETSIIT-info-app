@@ -4,8 +4,10 @@ import 'package:light/light.dart';
 
 class TopBar extends StatefulWidget {
   final String title;
+  final List<Widget>? actions;
+  final Widget? leading;
 
-  const TopBar({super.key, required this.title});
+  const TopBar({super.key, required this.title, this.actions, this.leading});
 
   @override
   _TopBarState createState() => _TopBarState();
@@ -36,6 +38,7 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: widget.leading,
       title: Text(
         widget.title,
         style: TextStyle(
@@ -44,6 +47,13 @@ class _TopBarState extends State<TopBar> {
       ),
       backgroundColor:
           _darkMode ? const Color.fromARGB(255, 53, 53, 53) : Colors.orange,
+      iconTheme: IconThemeData(
+        color: _darkMode ? Colors.white : Colors.white, // Icon color
+      ),
+      actionsIconTheme: IconThemeData(
+        color: _darkMode ? Colors.white : Colors.white, // Actions icon color
+      ),
+      actions: widget.actions,
     );
   }
 

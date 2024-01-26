@@ -9,6 +9,7 @@ class SideBar extends StatefulWidget {
   const SideBar({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SideBarState createState() => _SideBarState();
 }
 
@@ -37,9 +38,7 @@ class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: _darkMode
-          ? const Color(0xFF9E9E9E)
-          : Colors.white,
+      backgroundColor: _darkMode ? const Color(0xFF9E9E9E) : Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
