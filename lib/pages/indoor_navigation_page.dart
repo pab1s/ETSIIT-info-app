@@ -243,9 +243,12 @@ class _IndoorNavPageState extends State<IndoorNavPage>
     List<String> displayedSentences = _getDisplayedSentences();
 
     return Scaffold(
-      appBar: const TopBar(
-        title: "Localiza tu aula",
-        //isDarkMode: isDarkMode,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: TopBar(
+          title: "Localiza tu aula",
+          //isDarkMode: isDarkMode,
+        ),
       ),
       body: FutureBuilder<bool>(
         future: _isUserNearTarget(),

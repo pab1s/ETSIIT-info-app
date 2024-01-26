@@ -59,7 +59,9 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-      appBar: const TopBar(title: "Iniciar sesión"),
+      appBar: AppBar(
+        title: const Text("Iniciar sesión"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

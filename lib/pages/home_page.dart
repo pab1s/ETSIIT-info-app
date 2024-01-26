@@ -63,7 +63,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(title: 'Inicio'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: const TopBar(title: 'Inicio'),
+      ),
       drawer: const SideBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      'Bienvenido, Jonathan!',
+                      '¡Bienvenido, Luis!',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -85,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const CircleAvatar(
-                    backgroundImage: AssetImage('assets/avatar.jpeg'),
+                    backgroundImage: AssetImage('assets/user.jpg'),
                     radius: 30,
                   ),
                 ],

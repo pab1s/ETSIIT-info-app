@@ -345,7 +345,10 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
     }
 
     return Scaffold(
-      appBar: const TopBar(title: "Puntos de Interés"),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: TopBar(title: "Puntos de Interés"),
+      ),
       body: FlutterMap(
         mapController: _animatedMapController.mapController,
         options: MapOptions(
