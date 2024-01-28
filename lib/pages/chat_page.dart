@@ -134,7 +134,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: TopBar(
-          title: "Juan, tu asistente personal",
+          title: "Tu asistente personal de la ETSIIT",
         ),
       ),
       body: Column(
@@ -179,10 +179,6 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 style: const TextStyle(color: Colors.black),
               ),
-            ),
-            IconButton(
-              icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
-              onPressed: _isListening ? () => _speech?.stop() : startListening,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
