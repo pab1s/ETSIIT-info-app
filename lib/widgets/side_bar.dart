@@ -37,12 +37,13 @@ class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: _darkMode ? const Color(0xFF9E9E9E) : Colors.white,
+      backgroundColor:
+          _darkMode ? const Color.fromARGB(255, 63, 63, 63) : Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primary,
             ),
             child: Text(

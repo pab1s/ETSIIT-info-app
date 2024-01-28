@@ -28,7 +28,7 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage>
     with TickerProviderStateMixin {
-  final double _zoomLevel = 16; // default zoom level
+  final double _zoomLevel = 20; // default zoom level
   LatLng? currentLocation;
   late Marker originMarker;
   late Marker destinationMarker;
@@ -241,7 +241,7 @@ class _NavigationPageState extends State<NavigationPage>
       loc2.latitude,
       loc2.longitude,
     );
-    return distance / 1000; // Convert to kilometers
+    return distance / 1000;
   }
 
   double _calculateZoomLevel(double distance) {

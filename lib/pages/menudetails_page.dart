@@ -45,9 +45,13 @@ class MenuDetailsPage extends StatelessWidget {
                           _buildSectionHeader(sectionTitle),
                           const SizedBox(height: 8.0),
                           ...items.map((item) => Padding(
-                                padding: const EdgeInsets.only(bottom: 4.0),
-                                child: Text(item),
-                              )),
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ))),
                         ],
                       ),
                     ),
@@ -60,6 +64,7 @@ class MenuDetailsPage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.normal,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 20),
@@ -72,7 +77,10 @@ class MenuDetailsPage extends StatelessWidget {
               ),
               child: const Text(
                 'Pagar',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
             const SizedBox(height: 20),

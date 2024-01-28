@@ -339,8 +339,8 @@ class _MapaPageState extends State<MapaPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: TopBar(title: "Puntos de Interés"),
       ),
       body: currentLocation == null

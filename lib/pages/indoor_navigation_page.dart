@@ -9,6 +9,7 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_pixelmatching/flutter_pixelmatching.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
+import 'package:light/light.dart';
 
 import '../widgets/top_bar.dart';
 import '../services/location_service.dart';
@@ -35,9 +36,12 @@ class _IndoorNavPageState extends State<IndoorNavPage>
   Position? _currentPosition;
   late Timer _timer;
   bool isNearTarget = false;
-  static const double proximityThreshold = 5.0; // 5 meters
+  static const double proximityThreshold = 5.0; // 5 metros
   late AnimationController _controller;
   late Animation<double> _animation;
+  Light? _light;
+  StreamSubscription? _lightSubscription;
+  bool _darkMode = false;
 
   @override
   void initState() {
@@ -46,6 +50,12 @@ class _IndoorNavPageState extends State<IndoorNavPage>
     _initLocationAndOrientationListeners();
     sentences = receiveInstructions(widget.subfolderName);
     _initializePage();
+    _light = Light();
+    _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
+      setState(() {
+        _darkMode = luxValue < 100;
+      });
+    });
   }
 
   void _initializePage() async {
@@ -56,12 +66,13 @@ class _IndoorNavPageState extends State<IndoorNavPage>
     _animation = Tween<double>(begin: 1.0, end: 1.2).animate(_controller);
     _timer = Timer.periodic(
         const Duration(seconds: 1), (Timer t) => _checkProximity());
-    await _loadTargetImage(); // Ensure this is completed before any comparison
+    await _loadTargetImage();
   }
 
   @override
   void dispose() {
     _timer.cancel();
+    _lightSubscription?.cancel();
     _cameraController?.dispose();
     _compassSubscription?.cancel();
     _controller.dispose();
@@ -120,7 +131,7 @@ class _IndoorNavPageState extends State<IndoorNavPage>
     await _loadTargetImage();
 
     try {
-      // Capture image using device's camera
+      // Take photo
       final XFile? photo = await picker.pickImage(source: ImageSource.camera);
 
       if (photo != null) {
@@ -239,15 +250,16 @@ class _IndoorNavPageState extends State<IndoorNavPage>
   @override
   Widget build(BuildContext context) {
     bool isLastSentence = highlightedIndex == sentences.length - 1;
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     List<String> displayedSentences = _getDisplayedSentences();
+    var backgroundColor = _darkMode ? Colors.black : Colors.white;
+    var textColor = _darkMode ? Colors.white : Colors.black;
+    var buttonColor = _darkMode ? Colors.grey[800] : Colors.orange[300];
 
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: TopBar(
           title: "Localiza tu aula",
-          //isDarkMode: isDarkMode,
         ),
       ),
       body: FutureBuilder<bool>(
@@ -255,83 +267,86 @@ class _IndoorNavPageState extends State<IndoorNavPage>
         builder: (context, snapshot) {
           bool isNearTarget = snapshot.data ?? false;
 
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (isNearTarget)
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(10),
+          return Container(
+            color: backgroundColor,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  if (isNearTarget)
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "¡Estás cerca!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    child: const Text(
-                      "You are near!",
+                  Transform.rotate(
+                    angle: -_currentBearing * (math.pi / 180.0),
+                    child: const Icon(Icons.arrow_upward,
+                        size: 80, color: Colors.orange),
+                  ),
+                  const SizedBox(height: 20),
+                  ...List.generate(displayedSentences.length, (index) {
+                    int actualIndex =
+                        sentences.indexOf(displayedSentences[index]);
+                    return AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, child) {
+                        final scale = actualIndex == highlightedIndex
+                            ? _animation.value
+                            : 1.0;
+                        return Transform.scale(
+                          scale: scale,
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: actualIndex == highlightedIndex
+                                  ? Colors.orange[60]
+                                  : Colors.transparent,
+                              border: actualIndex == highlightedIndex
+                                  ? Border.all(color: Colors.orange, width: 2)
+                                  : null,
+                            ),
+                            child: Text(
+                              displayedSentences[index],
+                              style: TextStyle(
+                                color: textColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }),
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: _highlightNextOrFinish,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          isLastSentence ? Colors.green : buttonColor,
+                    ),
+                    child: Text(
+                      isLastSentence ? "Fin" : "Siguiente",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                        color: _darkMode ? Colors.white : Colors.black,
                       ),
                     ),
                   ),
-                Transform.rotate(
-                  angle: -_currentBearing * (math.pi / 180.0),
-                  child: const Icon(Icons.arrow_upward, size: 80),
-                ),
-                const SizedBox(height: 20),
-                ...List.generate(displayedSentences.length, (index) {
-                  int actualIndex =
-                      sentences.indexOf(displayedSentences[index]);
-                  return AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      final scale = actualIndex == highlightedIndex
-                          ? _animation.value
-                          : 1.0;
-                      return Transform.scale(
-                        scale: scale,
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: actualIndex == highlightedIndex
-                                ? Colors.blue[100]
-                                : Colors.transparent,
-                            border: actualIndex == highlightedIndex
-                                ? Border.all(color: Colors.blue, width: 2)
-                                : null,
-                          ),
-                          child: Text(
-                            displayedSentences[index],
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }),
-                const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: _highlightNextOrFinish,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: isLastSentence
-                        ? Colors.green
-                        : Theme.of(context).primaryColor,
-                  ),
-                  child: Text(
-                    isLastSentence ? "Finish" : "Next",
-                    style: TextStyle(
-                      color: isDarkMode ? Colors.black : Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/top_bar.dart';
 import '../utils/colors.dart';
 import 'main_page.dart';
 import 'dart:async';
@@ -16,6 +15,13 @@ class _LoginPageState extends State<LoginPage> {
   Light? _light;
   StreamSubscription? _lightSubscription;
   bool _darkMode = false;
+  bool _isLoggedIn = false;
+  String _username = '';
+  String _password = '';
+  String _loginMessage = '';
+
+  static const String _mockUsername = 'luis';
+  static const String _mockPassword = '1234';
 
   @override
   void initState() {
@@ -23,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     _light = Light();
     _lightSubscription = _light?.lightSensorStream.listen((luxValue) {
       setState(() {
-        _darkMode = luxValue < 100; // Ajusta este valor según sea necesario
+        _darkMode = luxValue < 100;
       });
     });
   }
@@ -34,9 +40,33 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  void _attemptLogin() {
+    if (_username == _mockUsername && _password == _mockPassword) {
+      setState(() {
+        _isLoggedIn = true;
+        _loginMessage = '';
+      });
+    } else {
+      setState(() {
+        _loginMessage = 'Credenciales incorrectas';
+      });
+    }
+  }
+
+  void _logout() {
+    setState(() {
+      _isLoggedIn = false;
+      _username = '';
+      _password = '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Estilos para modo oscuro
+    if (_isLoggedIn) {
+      return const MainPage();
+    }
+
     TextStyle textStyle = TextStyle(
       color: _darkMode ? Colors.white : Colors.black,
     );
@@ -52,7 +82,6 @@ class _LoginPageState extends State<LoginPage> {
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primary),
         ),
-        // Color del texto dentro del TextField
         fillColor: _darkMode ? Colors.black : Colors.white,
         filled: true,
       );
@@ -68,14 +97,15 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const SizedBox(height: 20),
             TextField(
+              onChanged: (value) => _username = value,
               style: textStyle,
               decoration: inputDecoration('Usuario'),
               cursorColor: _darkMode ? Colors.white : Colors.black,
             ),
             const SizedBox(height: 20),
             TextField(
+              onChanged: (value) => _password = value,
               obscureText: true,
               style: textStyle,
               decoration: inputDecoration('Contraseña'),
@@ -83,14 +113,20 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Implementar lógica de inicio de sesión
-              },
+              onPressed: _attemptLogin,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
               ),
               child: const Text('Iniciar sesión'),
             ),
+            if (_loginMessage.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  _loginMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
             TextButton(
               onPressed: () {
                 Navigator.pushReplacement(

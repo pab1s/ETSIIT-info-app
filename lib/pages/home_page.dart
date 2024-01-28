@@ -4,7 +4,7 @@ import 'package:light/light.dart';
 
 import '../widgets/top_bar.dart';
 import '../widgets/side_bar.dart';
-import 'indoor_navigation_page.dart';
+import 'locations_page.dart';
 import 'subjects_page.dart';
 import 'time_table_page.dart';
 import 'menu_page.dart';
@@ -63,9 +63,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const TopBar(title: 'Inicio'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: TopBar(title: 'Inicio'),
       ),
       drawer: const SideBar(),
       body: SingleChildScrollView(
@@ -121,9 +121,7 @@ class _HomePageState extends State<HomePage> {
                   label: 'Localizaciones',
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const IndoorNavPage(subfolderName: "lab")),
+                    MaterialPageRoute(builder: (context) => const LocationsPage()),
                   ),
                 ),
                 _buildGridButton(
