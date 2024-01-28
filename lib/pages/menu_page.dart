@@ -26,20 +26,20 @@ class _MenuPageState extends State<MenuPage> {
 
   final List<DiningOption> diningOptions = [
     DiningOption(
+        name: "Comedor ETSIIT",
+        menuDetails: menutext,
+        latitude: 37.19707,
+        longitude: -3.62460),
+    DiningOption(
         name: "Comedor PTS",
         menuDetails: menutext,
-        latitude: lat,
-        longitude: longi),
+        latitude: 37.14666,
+        longitude: -3.60571),
     DiningOption(
-        name: "Comedor 2",
+        name: "Comedor Fuentenueva",
         menuDetails: menutext,
-        latitude: lat,
-        longitude: longi),
-    DiningOption(
-        name: "Comedor 3",
-        menuDetails: menutext,
-        latitude: lat,
-        longitude: longi),
+        latitude: 37.18274,
+        longitude: -3.60564),
   ];
 
   @override
@@ -168,8 +168,10 @@ class _MenuPageState extends State<MenuPage> {
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => const NavigationPage(
-                  destLatitude: 37.19436, destLongitude: -3.60441),
+              builder: (_) => NavigationPage(
+                destLatitude: diningOption.latitude,
+                destLongitude: diningOption.longitude,
+              ),
             ));
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
@@ -210,6 +212,3 @@ Postres:
 
 Precio........................................3.5€
 ''';
-
-const double lat = 37.1481383;
-const double longi = -3.6038452;
