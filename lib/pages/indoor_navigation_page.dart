@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:math' as math;
 
 import '../widgets/top_bar.dart';
-import '../utils/location_service.dart';
+import '../services/location_service.dart';
 import '../entities/indoor.dart';
 
 class IndoorNavPage extends StatefulWidget {

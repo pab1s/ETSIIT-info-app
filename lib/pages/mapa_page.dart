@@ -7,8 +7,8 @@ import 'package:pedometer/pedometer.dart';
 import 'dart:async';
 
 import '../widgets/top_bar.dart';
-import '../utils/location_service.dart';
-import '../utils/pedometer_service.dart';
+import '../services/location_service.dart';
+import '../services/pedometer_service.dart';
 import 'navigation_page.dart';
 
 class MapaPage extends StatefulWidget {

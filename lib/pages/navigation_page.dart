@@ -10,9 +10,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
-import '../interface/api.dart';
-import '../utils/location_service.dart';
-import '../utils/pedometer_service.dart';
+import '../services/api.dart';
+import '../services/location_service.dart';
+import '../services/pedometer_service.dart';
 
 class NavigationPage extends StatefulWidget {
   final double destLatitude;
