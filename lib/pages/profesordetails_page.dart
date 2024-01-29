@@ -1,4 +1,4 @@
-import 'package:etsiit_info_app/entities/courses.dart';
+import '../entities/courses.dart';
 import 'package:flutter/material.dart';
 
 class ProfessorDetailsPage extends StatelessWidget {

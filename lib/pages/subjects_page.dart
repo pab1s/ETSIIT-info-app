@@ -1,7 +1,7 @@
-import 'package:etsiit_info_app/pages/profesordetails_page.dart';
+import '../pages/profesordetails_page.dart';
 import 'package:flutter/material.dart';
 // import '../widgets/top_bar.dart';
-import 'package:etsiit_info_app/entities/courses.dart';
+import '../entities/courses.dart';
 
 class SubjectsPage extends StatelessWidget {
   const SubjectsPage({super.key});

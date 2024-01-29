@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:etsiit_info_app/entities/courses.dart';
+import '../entities/courses.dart';
 
 void main() {
   runApp(const MyApp());

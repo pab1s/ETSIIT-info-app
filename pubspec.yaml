@@ -1,5 +1,5 @@
-name: etsiit_info_app
-description: "A new Flutter project."
+name: ETSIIT
+description: "Tu aplicación de confianza de la facultad."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -85,7 +85,7 @@ flutter:
     - assets/banner.png
     - assets/avatar.jpeg
     - assets/compass.png
-    - assets/tui.jpg
+    - assets/tui.png
     - assets/luiscrespo-QR.png
     - assets/dialogflowetsiit-3520cf6a0872.json
     - assets/indoor/lab/

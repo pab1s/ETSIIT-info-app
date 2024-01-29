@@ -3,7 +3,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'dart:async';
 import 'package:light/light.dart';
-import 'package:etsiit_info_app/entities/courses.dart';
+import '../entities/courses.dart';
 
 class TimeTableCalendar extends StatefulWidget {
   const TimeTableCalendar({super.key});
@@ -134,11 +134,12 @@ class CalendarAppointment extends State<TimeTableCalendar> {
           appointments.add(Appointment(
             startTime: DateTime(date.year, date.month, date.day,
                 course.startHour, course.startMinute),
-            endTime: DateTime(date.year, date.month, date.day,
-                course.endHour, course.endMinute),
+            endTime: DateTime(date.year, date.month, date.day, course.endHour,
+                course.endMinute),
             subject: course.title,
             color: course.color,
-            notes: 'Asignatura: ${course.nombreCompleto}\nProfesor: ${course.professor}\nAula: ${course.aula}',
+            notes:
+                'Asignatura: ${course.nombreCompleto}\nProfesor: ${course.professor}\nAula: ${course.aula}',
           ));
         }
       }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:etsiit_info_app/utils/colors.dart';
-import 'package:etsiit_info_app/pages/profile_page.dart';
-import 'package:etsiit_info_app/pages/login_page.dart';
+import '../utils/colors.dart';
+import '../pages/profile_page.dart';
+import '../pages/login_page.dart';
 import 'dart:async';
 import 'package:light/light.dart';
 

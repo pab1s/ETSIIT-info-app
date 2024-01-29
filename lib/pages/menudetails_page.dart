@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:etsiit_info_app/entities/dining_option.dart';
+import '../entities/dining_option.dart';
 import '../services/biometrics_service.dart';
 
 class MenuDetailsPage extends StatelessWidget {
